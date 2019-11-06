@@ -3,6 +3,7 @@ package com.woniuxy.test;
 public class First {
 	public static void main(String[] args) {
 		System.out.println("dujiangwei!~");
+		System.out.println("hahahaha");
 	}
 
 }
