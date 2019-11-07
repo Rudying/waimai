@@ -20,6 +20,8 @@ public class UserController {
 	@PostMapping
 	public void test(@RequestBody Users user) {
 		us.save(user);
+		 
+		System.out.println("wangyumo");
 	}
 
 }
