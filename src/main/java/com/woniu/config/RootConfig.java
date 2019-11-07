@@ -70,9 +70,10 @@ public class RootConfig {
 		map.put("/users.html", "anon");
 		map.put("/users", "anon");
 		map.put("/users/*", "anon");
+		map.put("/users/login", "anon");
 		//认证成功才可以访问的url
-		map.put("/**", "anon");
-//		map.put("/**", "authc");
+//		map.put("/**", "anon");
+		map.put("/**", "authc");
 		sf.setFilterChainDefinitionMap(map);
 		return sf;
 	}
