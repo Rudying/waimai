@@ -52,8 +52,8 @@ public class UserController {
 		}
 	}
 
-	// 删除
-	@DeleteMapping("{uid}")
+	// 删除   
+	@DeleteMapping("{uid}")   
 	public void delete(@PathVariable Integer uid) {
 		us.delete(uid);
 	}
