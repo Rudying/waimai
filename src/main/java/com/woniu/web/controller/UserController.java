@@ -19,7 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.woniu.domain.Users;
-import com.woniu.service.UserServiceImpl;
+import com.woniu.service.impl.UserServiceImpl;
+
 
 @RestController
 @RequestMapping("users")

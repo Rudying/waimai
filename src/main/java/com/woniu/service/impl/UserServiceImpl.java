@@ -1,4 +1,4 @@
-package com.woniu.service;
+package com.woniu.service.impl;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.woniu.dao.UsersMapper;
 import com.woniu.domain.Users;
+import com.woniu.service.IUserService;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -18,7 +19,6 @@ public class UserServiceImpl implements IUserService {
 	@Transactional
 	@Override
 	public void save(Users user) {
-		
 		um.insertSelective(user);
 		
 	}
@@ -33,11 +33,13 @@ public class UserServiceImpl implements IUserService {
 		um.updateByPrimaryKeySelective(user);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public Users findOne(Integer uid) {
 		return um.selectByPrimaryKey(uid);
 	}
 
+	@Transactional(readOnly = true)
 	@Override
 	public List<Users> findAll() {
 		// TODO Auto-generated method stub
