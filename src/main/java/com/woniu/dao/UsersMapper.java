@@ -30,5 +30,5 @@ public interface UsersMapper {
     
     void saveRole(Integer uid);
     
-    int getUserId(String username);
+    Integer getUserId(String username);
 }

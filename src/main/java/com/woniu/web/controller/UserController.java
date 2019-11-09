@@ -32,8 +32,8 @@ public class UserController {
 	// 注册
 	@PostMapping
 	public void test(@RequestBody Users user) {
-		System.out.println(user);
-		System.out.println("UserController.test()");
+		//设置盐
+		user.setSalt("wm");
 		SimpleHash sh = new SimpleHash("md5", user.getPassword(), user.getSalt(), 1024);
 		String hex = sh.toHex();
 		user.setPassword(hex);
@@ -50,27 +50,35 @@ public class UserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		if(uid != null) {
-//			return "true";
-//		}else {
-//			return "false";
-//		}
-		return "";
+		if(uid != null) {
+			return "true";
+		}else {
+			return "false";
+		}
+	}
+	//验证注册的账号是否重复
+	@GetMapping("{username}")
+	public String judge(@PathVariable String username) {
+		Integer userId = us.getUserId(username);
+		if(userId!=null) {
+			return "false";
+		}else {
+			return "true";
+		}
 	}
 
 	// 登录
 	@RequestMapping("login")
-	public void login(@RequestBody Users user) {
+	public String login(@RequestBody Users user) {
 		// 获取当前的主体
 		Subject subject = SecurityUtils.getSubject();
 
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
 		try {
 			subject.login(token);
-			System.out.println("登录成功");
+			return "true";
 		} catch (AuthenticationException e) {
-			e.printStackTrace();
-			System.out.println("登录失败");
+			return "false";
 		}
 	}
 
