@@ -49,6 +49,7 @@ public class UserController {
 		Integer userId = us.getUserId(username);
 		
 		if(userId!=null) {
+			
 			return "false";
 		}else {
 			return "true";
