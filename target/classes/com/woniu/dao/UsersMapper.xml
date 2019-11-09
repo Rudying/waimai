@@ -12,6 +12,7 @@
     <result column="salt" jdbcType="VARCHAR" property="salt" />
   </resultMap>
   <sql id="Example_Where_Clause">
+  
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">

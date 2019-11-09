@@ -34,6 +34,7 @@ public class UserController {
 	public void test(@RequestBody Users user) {
 		//设置盐
 		user.setSalt("wm");
+		
 		SimpleHash sh = new SimpleHash("md5", user.getPassword(), user.getSalt(), 1024);
 		String hex = sh.toHex();
 		user.setPassword(hex);

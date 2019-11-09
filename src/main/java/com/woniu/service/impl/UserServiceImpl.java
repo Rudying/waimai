@@ -22,6 +22,7 @@ public class UserServiceImpl implements IUserService {
 		um.insertSelective(user);
 		
 	}
+	
 	@Transactional
 	@Override
 	public void delete(Integer uid) {
