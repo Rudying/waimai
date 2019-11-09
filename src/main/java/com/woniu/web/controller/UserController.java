@@ -47,6 +47,7 @@ public class UserController {
 	@GetMapping("{username}")
 	public String judge(@PathVariable String username) {
 		Integer userId = us.getUserId(username);
+		
 		if(userId!=null) {
 			return "false";
 		}else {
