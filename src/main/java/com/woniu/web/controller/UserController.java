@@ -41,6 +41,22 @@ public class UserController {
 		Integer uid = us.getUserId(user.getUsername());
 		us.saveRole(uid);
 	}
+	
+	@GetMapping("{username}")
+	public String checkName(@PathVariable String username) {
+		Integer uid = us.getUserId("1");
+		try {
+			System.out.println(uid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+//		if(uid != null) {
+//			return "true";
+//		}else {
+//			return "false";
+//		}
+		return "";
+	}
 
 	// 登录
 	@RequestMapping("login")

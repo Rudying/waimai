@@ -52,7 +52,6 @@ public class UserServiceImpl implements IUserService {
 	}
 	@Override
 	public Integer getUserId(String username) {
-		// TODO Auto-generated method stub
 		return um.getUserId(username);
 	}
 
