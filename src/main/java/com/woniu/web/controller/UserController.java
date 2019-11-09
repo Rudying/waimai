@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.woniu.domain.Users;
+import com.woniu.service.IUserService;
 import com.woniu.service.impl.UserServiceImpl;
 
 
@@ -26,15 +27,19 @@ import com.woniu.service.impl.UserServiceImpl;
 @RequestMapping("users")
 public class UserController {
 	@Autowired
-	private UserServiceImpl us;
+	private IUserService us;
 
 	// 注册
 	@PostMapping
 	public void test(@RequestBody Users user) {
+		System.out.println(user);
+		System.out.println("UserController.test()");
 		SimpleHash sh = new SimpleHash("md5", user.getPassword(), user.getSalt(), 1024);
 		String hex = sh.toHex();
 		user.setPassword(hex);
 		us.save(user);
+		Integer uid = us.getUserId(user.getUsername());
+		us.saveRole(uid);
 	}
 
 	// 登录

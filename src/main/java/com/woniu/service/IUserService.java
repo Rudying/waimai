@@ -11,4 +11,6 @@ public interface IUserService {
    void update(Users user);
    Users findOne(Integer uid);
    List<Users> findAll();
+   void saveRole(Integer uid);
+   Integer getUserId(String username);
 }

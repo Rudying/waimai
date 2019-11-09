@@ -45,5 +45,15 @@ public class UserServiceImpl implements IUserService {
 		// TODO Auto-generated method stub
 		return um.selectByExample(null);
 	}
+	@Override
+	public void saveRole(Integer uid) {
+		// TODO Auto-generated method stub
+		um.saveRole(uid);
+	}
+	@Override
+	public Integer getUserId(String username) {
+		// TODO Auto-generated method stub
+		return um.getUserId(username);
+	}
 
 }
