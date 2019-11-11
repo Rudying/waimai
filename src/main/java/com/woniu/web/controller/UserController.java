@@ -35,6 +35,7 @@ public class UserController {
 		//设置盐
 		
 		System.out.println("dev");
+		System.out.println("测试dev");
 		
 		user.setSalt("wm");
 		SimpleHash sh = new SimpleHash("md5", user.getPassword(), user.getSalt(), 1024);
