@@ -33,12 +33,8 @@ public class UserController {
 	@PostMapping
 	public void test(@RequestBody Users user) {
 		//设置盐
-		
-		System.out.println("dev");
-		System.out.println("测试dev");
-		System.out.println("练习dev分支");
-		
 		user.setSalt("wm");
+		
 		SimpleHash sh = new SimpleHash("md5", user.getPassword(), user.getSalt(), 1024);
 		String hex = sh.toHex();
 		user.setPassword(hex);
@@ -46,26 +42,14 @@ public class UserController {
 		Integer uid = us.getUserId(user.getUsername());
 		us.saveRole(uid);
 	}
-	
-	@GetMapping("{username}")
-	public String checkName(@PathVariable String username) {
-		Integer uid = us.getUserId("1");
-		try {
-			System.out.println(uid);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if(uid != null) {
-			return "true";
-		}else {
-			return "false";
-		}
-	}
+
 	//验证注册的账号是否重复
 	@GetMapping("{username}")
 	public String judge(@PathVariable String username) {
 		Integer userId = us.getUserId(username);
+		
 		if(userId!=null) {
+			
 			return "false";
 		}else {
 			return "true";
@@ -74,16 +58,15 @@ public class UserController {
 
 	// 登录
 	@RequestMapping("login")
-	public String login(@RequestBody Users user) {
-		// 获取当前的主体
+	public Users login(@RequestBody Users user) {
+		// 获取当前的主体 
 		Subject subject = SecurityUtils.getSubject();
-
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
 		try {
 			subject.login(token);
-			return "true";
+			return us.findOne(us.getUserId(user.getUsername()));
 		} catch (AuthenticationException e) {
-			return "false";
+			return null;
 		}
 	}
 
