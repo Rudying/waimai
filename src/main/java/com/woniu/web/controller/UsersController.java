@@ -25,7 +25,7 @@ import com.woniu.service.impl.UserServiceImpl;
 
 @RestController
 @RequestMapping("users")
-public class UserController {
+public class UsersController {
 	@Autowired
 	private IUserService us;
 
