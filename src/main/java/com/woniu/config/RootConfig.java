@@ -24,7 +24,7 @@ public class RootConfig {
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
 		ds.setUrl("jdbc:mysql://localhost:3306/waimai?characterEncoding=utf8");
 		ds.setUsername("root");
-		ds.setPassword("root");
+		ds.setPassword("212212");
 		return ds;
 	}
 	
@@ -72,8 +72,8 @@ public class RootConfig {
 		map.put("/users/*", "anon");
 		map.put("/users/login", "anon");
 		//认证成功才可以访问的url
-//		map.put("/**", "anon");
-		map.put("/**", "authc");
+        map.put("/**", "anon");
+		//map.put("/**", "authc");
 		sf.setFilterChainDefinitionMap(map);
 		return sf;
 	}

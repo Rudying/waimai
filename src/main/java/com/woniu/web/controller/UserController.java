@@ -47,20 +47,6 @@ public class UserController {
 		us.saveRole(uid);
 	}
 	
-	@GetMapping("{username}")
-	public String checkName(@PathVariable String username) {
-		Integer uid = us.getUserId("1");
-		try {
-			System.out.println(uid);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if(uid != null) {
-			return "true";
-		}else {
-			return "false";
-		}
-	}
 	//验证注册的账号是否重复
 	@GetMapping("{username}")
 	public String judge(@PathVariable String username) {
