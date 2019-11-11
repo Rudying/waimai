@@ -24,7 +24,7 @@ public class RootConfig {
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
 		ds.setUrl("jdbc:mysql://localhost:3306/waimai?characterEncoding=utf8");
 		ds.setUsername("root");
-		ds.setPassword("root");
+		ds.setPassword("123456");
 		return ds;
 	}
 	
