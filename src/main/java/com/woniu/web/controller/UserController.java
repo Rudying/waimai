@@ -36,6 +36,7 @@ public class UserController {
 		
 		System.out.println("dev");
 		System.out.println("测试dev");
+		System.out.println("练习dev分支");
 		
 		user.setSalt("wm");
 		SimpleHash sh = new SimpleHash("md5", user.getPassword(), user.getSalt(), 1024);
