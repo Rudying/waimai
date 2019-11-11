@@ -33,6 +33,9 @@ public class UserController {
 	@PostMapping
 	public void test(@RequestBody Users user) {
 		//设置盐
+		
+		System.out.println("dev");
+		
 		user.setSalt("wm");
 		SimpleHash sh = new SimpleHash("md5", user.getPassword(), user.getSalt(), 1024);
 		String hex = sh.toHex();
