@@ -71,8 +71,8 @@ public class RootConfig {
 		map.put("/users", "anon");
 		map.put("/users/*", "anon");
 		map.put("/users/login", "anon");
+		map.put("/logout", "logout");
 		//认证成功才可以访问的url
-//		map.put("/**", "anon");
 		map.put("/**", "authc");
 		sf.setFilterChainDefinitionMap(map);
 		return sf;
