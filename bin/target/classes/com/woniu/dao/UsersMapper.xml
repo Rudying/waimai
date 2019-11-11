@@ -12,6 +12,7 @@
     <result column="salt" jdbcType="VARCHAR" property="salt" />
   </resultMap>
   <sql id="Example_Where_Clause">
+  
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
         <if test="criteria.valid">
@@ -255,4 +256,15 @@
       salt = #{salt,jdbcType=VARCHAR}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
+  
+  
+  <!-- 添加默认角色的sql -->
+  <insert id="saveRole" parameterType="int">
+  	INSERT INTO user_roles VALUES(#{uid},2)
+  </insert>
+  <!-- 根据用户名查询id -->
+  <select id="getUserId" parameterType="String" resultType="int">
+  	SELECT uid FROM users WHERE username = #{username}
+  </select>
+  
 </mapper>
