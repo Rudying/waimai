@@ -22,7 +22,7 @@ public class PermissionsController {
 	@Autowired
 	private IPermissionService ps;
 
-	// 添加菜品
+	// 添加权限
 	@PostMapping
 	public void test(@RequestBody Permissions p) {	
 		ps.save(p);

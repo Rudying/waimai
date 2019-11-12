@@ -100,7 +100,7 @@
     insert into permissions (pid, pname)
     values (#{pid,jdbcType=INTEGER}, #{pname,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.woniu.domain.Permissions">
+  <insert id="insertSelective" parameterType="com.woniu.domain.Permissions" useGeneratedKeys="true" keyProperty="pid">
     insert into permissions
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pid != null">

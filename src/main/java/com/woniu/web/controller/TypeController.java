@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.woniu.domain.Type;
 import com.woniu.service.ITypeService;
@@ -31,7 +30,7 @@ public class TypeController {
 
 	// 添加图片
 	@PostMapping
-	public void test(Type type,@RequestParam CommonsMultipartFile photo,HttpServletRequest req) {	
+	public void test(Type type,MultipartFile photo,HttpServletRequest req) {	
 		StringBuilder s = new StringBuilder();	
 		String OldName = photo.getOriginalFilename();
 		int lastDot = OldName.lastIndexOf(".");

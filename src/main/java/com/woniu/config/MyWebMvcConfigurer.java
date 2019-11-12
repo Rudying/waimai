@@ -18,11 +18,5 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 					.allowedHeaders("*")
 					.maxAge(60);
 	}
-    
-	//文件上传解析器
-	@Bean
-	public CommonsMultipartResolver multipartResolver() {
-		return new CommonsMultipartResolver();
-	}
 	
 }
