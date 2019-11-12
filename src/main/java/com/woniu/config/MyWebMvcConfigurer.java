@@ -1,6 +1,8 @@
 package com.woniu.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -16,6 +18,11 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 					.allowedHeaders("*")
 					.maxAge(60);
 	}
-
+    
+	//文件上传解析器
+	@Bean
+	public CommonsMultipartResolver multipartResolver() {
+		return new CommonsMultipartResolver();
+	}
 	
 }
