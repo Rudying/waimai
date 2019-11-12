@@ -6,3 +6,5 @@ spring:
     view:
       prefix: /
       suffix: .jsp
+      
+      
