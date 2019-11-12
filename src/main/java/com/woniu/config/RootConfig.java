@@ -67,7 +67,6 @@ public class RootConfig {
 		
 		Map<String, String> map = new HashMap<>();
 		//不需要认证就可以访问的url
-		map.put("/users.html", "anon");
 		map.put("/users", "anon");
 		map.put("/users/*", "anon");
 		map.put("/users/login", "anon");
