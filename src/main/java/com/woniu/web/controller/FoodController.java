@@ -58,12 +58,10 @@ public class FoodController {
 			String[] strs = oldFile.split(",");
 			for (int i = 0; i < strs.length; i++) {
 				File temp = new File(path, strs[i]);
-				System.out.println(temp + "!!!!！");
 				temp.delete();
 			}
 		} else {
 			File temp = new File(path, oldFile);
-			System.out.println(temp + "~~~~~~~");
 			temp.delete();
 		}
 		fs.delete(id);

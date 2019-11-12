@@ -1,6 +1,8 @@
 package com.woniu.web.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -28,6 +30,8 @@ import com.woniu.service.impl.UserServiceImpl;
 public class UserController {
 	@Autowired
 	private IUserService us;
+	
+	private static Map<String,String> map = new HashMap<String,String>();
 
 	// 注册
 	@PostMapping
@@ -54,17 +58,45 @@ public class UserController {
 			return "true";
 		}
 	}
+	
+	//判断是否登录
+	@GetMapping("/isLogin")
+	public Map<String,Object> isLogin() {
+		Subject subject = SecurityUtils.getSubject();
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		map.put("isLogin", subject.isAuthenticated());
+		if(subject.isAuthenticated()==true) {
+			//获得当前登录账号 subject.getPrincipal()
+			Object principal = subject.getPrincipal();
+			map.put("loginName", principal);
+		}
+		return map;
+	}
+	
+	//安全退出
+	@PostMapping("/logout")
+	public void logout(@RequestBody String loginName) {
+		Subject subject = SecurityUtils.getSubject();
+		map.remove(loginName.split(":")[1].split("\"")[1]);
+		subject.logout();
+	}
 
 	// 登录
 	@RequestMapping("login")
 	public Users login(@RequestBody Users user) {
 		// 获取当前的主体 
 		Subject subject = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
-		try {
+		
+		String name = map.get(user.getUsername());
+		
+		if(name==null) {
+			UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
 			subject.login(token);
+			String loginName = subject.getPrincipal().toString();
+			String sessionId = subject.getSession().getId().toString();
+			map.put(loginName, sessionId);
 			return us.findOne(us.getUserId(user.getUsername()));
-		} catch (AuthenticationException e) {
+		}else {
 			return null;
 		}
 	}

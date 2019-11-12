@@ -29,26 +29,33 @@ public class TypeController {
 
 	// 添加图片
 	@PostMapping
-	public void test(Type type,MultipartFile[] photo,HttpServletRequest request) throws IllegalStateException, IOException {	
-		StringBuilder sb=new StringBuilder();
-		System.out.println(photo);
-		for (int i = 0; i < photo.length; i++) {
-			String oldName=photo[i].getOriginalFilename();
-		    String hz=oldName.substring(oldName.lastIndexOf("."));
-		    String newName=UUID.randomUUID().toString().replaceAll("-", "")+hz;
-		    String path=request.getServletContext().getRealPath("/images");
-		    System.out.println(path);
-		    File dir=new File(path);
-		    if (!dir.exists()) {
-				dir.mkdirs();
-			}
-		    photo[i].transferTo(new File(path, newName));
-		    sb.append(newName);
-		    sb.append(",");
+	public void test(Type type,MultipartFile photo,HttpServletRequest req) {	
+		StringBuilder s = new StringBuilder();	
+		String OldName = photo.getOriginalFilename();
+		int lastDot = OldName.lastIndexOf(".");
+		String ext = OldName.substring(lastDot); 
+		
+		String newName = UUID.randomUUID().toString().replace("-", "")+ext;
+		
+		String path = req.getServletContext().getRealPath("/images");
+		
+		System.out.println(path);
+		File dir = new File(path);
+		if(!dir.exists()){
+			dir.mkdirs();
 		}
-		//将多个照片的地址用逗号隔开储存在数据库并且删掉最后一个逗号
-		sb.deleteCharAt(sb.length()-1);
-		type.setTphoto(sb.toString());
+		
+		try {
+			photo.transferTo(new File(path,newName));
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		s.append(newName);
+		s.append(",");
+		s.deleteCharAt(s.length()-1);
+		type.setTphoto(s.toString());
 		ts.save(type);
 	}
 	

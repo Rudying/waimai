@@ -12,8 +12,6 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-
 import com.alibaba.druid.pool.DruidDataSource;
 
 @Configuration
@@ -68,13 +66,12 @@ public class RootConfig {
 		
 		Map<String, String> map = new HashMap<>();
 		//不需要认证就可以访问的url
-		map.put("/users.html", "anon");
 		map.put("/users", "anon");
 		map.put("/users/*", "anon");
 		map.put("/users/login", "anon");
 		map.put("/logout", "logout");
 		//认证成功才可以访问的url
-        map.put("/**", "anon");
+         map.put("/**", "anon");
 		//map.put("/**", "authc");
 		sf.setFilterChainDefinitionMap(map);
 		return sf;
