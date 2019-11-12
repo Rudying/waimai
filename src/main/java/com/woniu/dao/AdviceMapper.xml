@@ -1,211 +1,268 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.dao.AdviceMapper">
-  <resultMap id="BaseResultMap" type="com.woniu.domain.Advice">
-    <id column="adid" jdbcType="INTEGER" property="adid" />
-    <result column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="ainfo" jdbcType="VARCHAR" property="ainfo" />
-    <result column="astatus" jdbcType="INTEGER" property="astatus" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    adid, uid, sid, ainfo, astatus
-  </sql>
-  <select id="selectByExample" parameterType="com.woniu.domain.AdviceExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from advice
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from advice
-    where adid = #{adid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from advice
-    where adid = #{adid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.woniu.domain.AdviceExample">
-    delete from advice
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.woniu.domain.Advice">
-    insert into advice (adid, uid, sid, 
-      ainfo, astatus)
-    values (#{adid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, 
-      #{ainfo,jdbcType=VARCHAR}, #{astatus,jdbcType=INTEGER})
-  </insert>
-  <insert id="insertSelective" parameterType="com.woniu.domain.Advice">
-    insert into advice
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="adid != null">
-        adid,
-      </if>
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="sid != null">
-        sid,
-      </if>
-      <if test="ainfo != null">
-        ainfo,
-      </if>
-      <if test="astatus != null">
-        astatus,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="adid != null">
-        #{adid,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="ainfo != null">
-        #{ainfo,jdbcType=VARCHAR},
-      </if>
-      <if test="astatus != null">
-        #{astatus,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.woniu.domain.AdviceExample" resultType="java.lang.Long">
-    select count(*) from advice
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update advice
-    <set>
-      <if test="record.adid != null">
-        adid = #{record.adid,jdbcType=INTEGER},
-      </if>
-      <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=INTEGER},
-      </if>
-      <if test="record.sid != null">
-        sid = #{record.sid,jdbcType=INTEGER},
-      </if>
-      <if test="record.ainfo != null">
-        ainfo = #{record.ainfo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.astatus != null">
-        astatus = #{record.astatus,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update advice
-    set adid = #{record.adid,jdbcType=INTEGER},
-      uid = #{record.uid,jdbcType=INTEGER},
-      sid = #{record.sid,jdbcType=INTEGER},
-      ainfo = #{record.ainfo,jdbcType=VARCHAR},
-      astatus = #{record.astatus,jdbcType=INTEGER}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.woniu.domain.Advice">
-    update advice
-    <set>
-      <if test="uid != null">
-        uid = #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        sid = #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="ainfo != null">
-        ainfo = #{ainfo,jdbcType=VARCHAR},
-      </if>
-      <if test="astatus != null">
-        astatus = #{astatus,jdbcType=INTEGER},
-      </if>
-    </set>
-    where adid = #{adid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.woniu.domain.Advice">
-    update advice
-    set uid = #{uid,jdbcType=INTEGER},
-      sid = #{sid,jdbcType=INTEGER},
-      ainfo = #{ainfo,jdbcType=VARCHAR},
-      astatus = #{astatus,jdbcType=INTEGER}
-    where adid = #{adid,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap" type="com.woniu.domain.Advice">
+		<id column="adid" jdbcType="INTEGER" property="adid" />
+		<result column="uid" jdbcType="INTEGER" property="uid" />
+		<result column="sid" jdbcType="INTEGER" property="sid" />
+		<result column="ainfo" jdbcType="VARCHAR" property="ainfo" />
+		<result column="astatus" jdbcType="INTEGER" property="astatus" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		adid, uid, sid, ainfo, astatus
+	</sql>
+	<select id="selectByExample"
+		parameterType="com.woniu.domain.AdviceExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from advice
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from advice
+		where adid = #{adid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from advice
+		where adid = #{adid,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.woniu.domain.AdviceExample">
+		delete from advice
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.woniu.domain.Advice">
+		insert into advice (adid, uid, sid,
+		ainfo, astatus)
+		values (#{adid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER},
+		#{sid,jdbcType=INTEGER},
+		#{ainfo,jdbcType=VARCHAR}, #{astatus,jdbcType=INTEGER})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.woniu.domain.Advice">
+		insert into advice
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="adid != null">
+				adid,
+			</if>
+			<if test="uid != null">
+				uid,
+			</if>
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="ainfo != null">
+				ainfo,
+			</if>
+			<if test="astatus != null">
+				astatus,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="adid != null">
+				#{adid,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=INTEGER},
+			</if>
+			<if test="ainfo != null">
+				#{ainfo,jdbcType=VARCHAR},
+			</if>
+			<if test="astatus != null">
+				#{astatus,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.woniu.domain.AdviceExample"
+		resultType="java.lang.Long">
+		select count(*) from advice
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update advice
+		<set>
+			<if test="record.adid != null">
+				adid = #{record.adid,jdbcType=INTEGER},
+			</if>
+			<if test="record.uid != null">
+				uid = #{record.uid,jdbcType=INTEGER},
+			</if>
+			<if test="record.sid != null">
+				sid = #{record.sid,jdbcType=INTEGER},
+			</if>
+			<if test="record.ainfo != null">
+				ainfo = #{record.ainfo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.astatus != null">
+				astatus = #{record.astatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update advice
+		set adid = #{record.adid,jdbcType=INTEGER},
+		uid = #{record.uid,jdbcType=INTEGER},
+		sid = #{record.sid,jdbcType=INTEGER},
+		ainfo = #{record.ainfo,jdbcType=VARCHAR},
+		astatus = #{record.astatus,jdbcType=INTEGER}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.woniu.domain.Advice">
+		update advice
+		<set>
+			<if test="uid != null">
+				uid = #{uid,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				sid = #{sid,jdbcType=INTEGER},
+			</if>
+			<if test="ainfo != null">
+				ainfo = #{ainfo,jdbcType=VARCHAR},
+			</if>
+			<if test="astatus != null">
+				astatus = #{astatus,jdbcType=INTEGER},
+			</if>
+		</set>
+		where adid = #{adid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.woniu.domain.Advice">
+		update advice
+		set uid = #{uid,jdbcType=INTEGER},
+		sid = #{sid,jdbcType=INTEGER},
+		ainfo = #{ainfo,jdbcType=VARCHAR},
+		astatus = #{astatus,jdbcType=INTEGER}
+		where adid = #{adid,jdbcType=INTEGER}
+	</update>
+
+
+
+
+	<select id="findAll" resultMap="rm">
+		SELECT * FROM advice a JOIN users u
+		ON a.`uid`=u.`uid`
+		JOIN shop s
+		ON a.`sid`=s.`sid`
+	</select>
+	<resultMap type="com.woniu.domain.Advice" id="rm">
+		<id property="adid" column="adid"></id>
+		<result property="ainfo" column="ainfo" />
+		<result property="astatus" column="astatus"/>
+		<result property="uid" column="uid" />
+		<result property="sid" column="sid" />
+		<association property="users"
+			javaType="com.woniu.domain.Users">
+			<id property="uid" column="uid" />
+			<result property="username" column="username" />
+			<result property="password" column="password" />
+			<result property="sex" column="sex" />
+			<result property="photo" column="photo" />
+			<result property="nickname" column="nickname" />
+			<result property="email" column="email" />
+			<result property="salt" column="salt" />
+		</association>
+		<association property="shop"
+			javaType="com.woniu.domain.Shop">
+			<id property="sid" column="sid" />
+			<result property="sname" column="sname" />
+			<result property="sinfo" column="sinfo" />
+			<result property="stel" column="stel" />
+			<result property="saddress" column="saddress" />
+			<result property="opentime" column="opentime" />
+			<result property="closetime" column="closetime" />
+			<result property="sstatus" column="sstatus" />
+			<result property="coin" column="coin" />
+		</association>
+	</resultMap>
 </mapper>

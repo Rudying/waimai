@@ -16,8 +16,28 @@ public class Food implements Serializable {
     private String fphoto;
 
     private Double fprice;
+    
+    private Shop shop;
+    
+    private Type type;
+    
+    public Shop getShop() {
+		return shop;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getFid() {
         return fid;

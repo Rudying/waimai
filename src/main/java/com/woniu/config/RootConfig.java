@@ -12,6 +12,7 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.alibaba.druid.pool.DruidDataSource;
 
@@ -77,6 +78,5 @@ public class RootConfig {
 		//map.put("/**", "authc");
 		sf.setFilterChainDefinitionMap(map);
 		return sf;
-	}
-	
+	}	
 }

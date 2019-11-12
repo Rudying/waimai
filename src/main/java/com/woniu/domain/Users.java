@@ -1,6 +1,7 @@
 package com.woniu.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public class Users implements Serializable {
     private Integer uid;
@@ -18,8 +19,28 @@ public class Users implements Serializable {
     private String email;
 
     private String salt;
+    
+    private Set<Advice> advices;
+    
+    private Shop shop;
+    
+	public Shop getShop() {
+		return shop;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	public Set<Advice> getAdvices() {
+		return advices;
+	}
+
+	public void setAdvices(Set<Advice> advices) {
+		this.advices = advices;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getUid() {
         return uid;
