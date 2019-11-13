@@ -96,6 +96,8 @@ public class UserController {
 			String loginName = subject.getPrincipal().toString();
 			String sessionId = subject.getSession().getId().toString();
 			map.put(loginName, sessionId);
+		    
+
 			return us.findOne(us.getUserId(user.getUsername()));
 		}else {
 			return null;

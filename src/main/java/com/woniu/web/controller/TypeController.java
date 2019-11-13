@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,8 @@ import com.woniu.service.ITypeService;
 @RestController
 @RequestMapping("type")
 public class TypeController {
-	@Autowired
+	
+	@Resource
 	private ITypeService ts;
 
 	// 添加图片
@@ -62,7 +64,7 @@ public class TypeController {
 	}
 	
 	// 删除   
-	@DeleteMapping("{tid}")   
+	@PostMapping("{tid}")   
 	public void delete(@PathVariable Integer tid) {
 		ts.delete(tid);
 	}
