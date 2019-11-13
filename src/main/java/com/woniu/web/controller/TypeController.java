@@ -12,12 +12,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.woniu.domain.Type;
 import com.woniu.service.ITypeService;
@@ -31,7 +29,7 @@ public class TypeController {
 
 	// 添加图片
 	@PostMapping
-	public void test(Type type,@RequestParam CommonsMultipartFile photo,HttpServletRequest req) {	
+	public void test(Type type,MultipartFile photo,HttpServletRequest req) {	
 		StringBuilder s = new StringBuilder();	
 		String OldName = photo.getOriginalFilename();
 		int lastDot = OldName.lastIndexOf(".");
@@ -59,7 +57,6 @@ public class TypeController {
 		s.deleteCharAt(s.length()-1);
 		type.setTphoto(s.toString());
 		ts.save(type);
-	
 	}
 	
 	// 删除   
@@ -71,13 +68,14 @@ public class TypeController {
 	// 查询所有
 	@GetMapping
 	public List<Type> findAll() {
+		System.out.println();
 		return ts.findAll();
 	}
 
 	// 修改
-	@PutMapping
-	public void update(@RequestBody Type t) {
-		ts.update(t);
+	@RequestMapping("update")
+	public void update(Type type) {		
+		ts.update(type);
 	}
 
 }

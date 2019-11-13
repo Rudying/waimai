@@ -46,7 +46,7 @@ private AdviceMapper mapper;
 	@Override
 	public List<Advice> findAll() {
 		// TODO Auto-generated method stub
-		return mapper.selectByExample(null);
+		return mapper.findAll();
 	}
 
 }

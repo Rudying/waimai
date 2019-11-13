@@ -19,11 +19,5 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 					.allowCredentials(true)
 					.maxAge(60);
 	}
-    
-	//文件上传解析器
-	@Bean
-	public CommonsMultipartResolver multipartResolver() {
-		return new CommonsMultipartResolver();
-	}
 	
 }

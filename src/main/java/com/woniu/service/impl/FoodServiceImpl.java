@@ -46,7 +46,7 @@ private FoodMapper mapper;
 	@Override
 	public List<Food> findAll() {
 		// TODO Auto-generated method stub
-		return mapper.selectByExample(null);
+		return mapper.findAll();
 	}
 
 }

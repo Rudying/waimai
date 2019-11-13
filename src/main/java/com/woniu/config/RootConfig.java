@@ -1,5 +1,6 @@
 package com.woniu.config;
 
+import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,14 +11,23 @@ import org.apache.shiro.realm.jdbc.JdbcRealm;
 import org.apache.shiro.realm.jdbc.JdbcRealm.SaltStyle;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import com.alibaba.druid.pool.DruidDataSource;
+import com.woniu.util.WebSessionLisener;
 
 @Configuration
 public class RootConfig {
    
+	@Bean //配置session监听器
+	public ServletListenerRegistrationBean<WebSessionLisener> r(){
+		ServletListenerRegistrationBean<WebSessionLisener> s = new ServletListenerRegistrationBean<>();
+		s.setListener(new WebSessionLisener());
+		return s;
+	}
+	
+	
 	@Bean //配置数据源
 	public DataSource ds() {
 		DruidDataSource ds = new DruidDataSource();
@@ -72,10 +82,9 @@ public class RootConfig {
 		map.put("/users/login", "anon");
 		map.put("/logout", "logout");
 		//认证成功才可以访问的url
-//		map.put("/**", "authc");
-		map.put("/**", "anon");
+         map.put("/**", "anon");
+		//map.put("/**", "authc");
 		sf.setFilterChainDefinitionMap(map);
 		return sf;
-	}
-	
+	}	
 }

@@ -12,8 +12,28 @@ public class Advice implements Serializable {
     private String ainfo;
 
     private Integer astatus;
+    
+    private Users users;
+    
+    private Shop shop;
+    
+	public Users getUsers() {
+		return users;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getAdid() {
         return adid;

@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -33,7 +36,7 @@ public class UserController {
 	@Autowired
 	private IUserService us;
 	
-	private static Map<String,String> map = new HashMap<String,String>();
+	public static Map<String,String> map = new HashMap<String,String>();
 	
 
 	// 注册
@@ -49,7 +52,6 @@ public class UserController {
 		Integer uid = us.getUserId(user.getUsername());
 		us.saveRole(uid);
 	}
-
 	//验证注册的账号是否重复
 	@GetMapping("{username}")
 	public String judge(@PathVariable String username) {
@@ -81,20 +83,14 @@ public class UserController {
 	@PostMapping("/logout")
 	public void logout(@RequestBody String loginName) {
 		Subject subject = SecurityUtils.getSubject();
-		long t = subject.getSession().getTimeout();
-		System.out.println("logou----"+t);
-		map.remove(loginName.split(":")[1].split("\"")[1]);
 		subject.logout();
 	}
 
 	// 登录
 	@RequestMapping("login")
-	public Users login(@RequestBody Users user) {
+	public Users login(@RequestBody Users user,HttpServletRequest request) {
 		// 获取当前的主体 
 		Subject subject = SecurityUtils.getSubject();
-		
-		Date s = subject.getSession().getStartTimestamp();
-		System.out.println("login-===="+s);
 		
 		String name = map.get(user.getUsername());
 		
@@ -102,8 +98,7 @@ public class UserController {
 			UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
 			subject.login(token);
 			String loginName = subject.getPrincipal().toString();
-			String sessionId = subject.getSession().getId().toString();
-			map.put(loginName, sessionId);
+			map.put(loginName, request.getSession().toString());
 			return us.findOne(us.getUserId(user.getUsername()));
 		}else {
 			return null;
