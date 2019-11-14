@@ -71,6 +71,7 @@ public class UserController {
 		Subject subject = SecurityUtils.getSubject();
 		HashMap<String, Object> map2 = new HashMap<String,Object>();
 		map2.put("isLogin", subject.isAuthenticated());
+		System.out.println("前段session"+subject.getSession().getId());
 		if(subject.isAuthenticated()==true) {
 			//获得当前登录账号 subject.getPrincipal()
 			Object principal = subject.getPrincipal();
@@ -91,9 +92,7 @@ public class UserController {
 	public Users login(@RequestBody Users user,HttpServletRequest request) {
 		// 获取当前的主体 
 		Subject subject = SecurityUtils.getSubject();
-		
 		String name = map.get(user.getUsername());
-		
 		if(name==null) {
 			UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), user.getPassword());
 			subject.login(token);
