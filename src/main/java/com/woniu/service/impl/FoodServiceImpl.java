@@ -45,15 +45,17 @@ private FoodMapper mapper;
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<Food> findAll(RowBounds rb){
+	public List<Food> findAll(Integer currentPage, Integer pageSize){
 		// TODO Auto-generated method stub
-		return mapper.findAll(rb);
+		return mapper.findAll(new RowBounds(currentPage, pageSize));
 	}
 
+	@Transactional(readOnly = true)
 	@Override
-	public List<Food> find() {
+	public Integer findCount() {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.selectByExample(null).size();
 	}
+
 
 }

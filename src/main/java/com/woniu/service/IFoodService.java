@@ -12,6 +12,6 @@ public interface IFoodService {
    void delete(Integer id);
    void update(Food t);
    Food findOne(Integer id);
-   List<Food> findAll(RowBounds rb);
-   List<Food> find();
+   List<Food> findAll(Integer currentPage, Integer pageSize);
+   Integer findCount();
 }

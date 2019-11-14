@@ -69,8 +69,14 @@ public class FoodController {
 
 	// 查询所有
 	@PostMapping("find")
-	public List<Food> findAll(Integer currentPage,Integer pageSize) {
-		return fs.findAll(new RowBounds(currentPage, pageSize));
+	public List<Food> findAll(Integer limit,Integer offset) {
+		return fs.findAll((offset-1)*limit,limit);
+	}
+	
+	//查询到的所有行数
+	@PostMapping("count")
+	public Integer count() {
+		return fs.findCount();	
 	}
 
 	// 修改

@@ -10,5 +10,7 @@ public interface ITypeService {
    void delete(Integer id);
    void update(Type t);
    Type findOne(Integer id);
-   List<Type> findAll();
+   List<Type> findAll(Integer currentPage, Integer pageSize);
+   Integer findCount();
+   List<Type>findAllType();
 }

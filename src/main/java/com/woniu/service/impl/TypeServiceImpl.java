@@ -2,6 +2,7 @@ package com.woniu.service.impl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +45,21 @@ private TypeMapper mapper;
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<Type> findAll() {
+	public List<Type> findAll(Integer currentPage, Integer pageSize) {
+		// TODO Auto-generated method stub
+		
+		return mapper.selectByExample(null, new RowBounds(currentPage, pageSize));
+	}
+	
+	@Transactional(readOnly = true)
+	@Override
+	public Integer findCount() {
+		// TODO Auto-generated method stub
+		return mapper.selectByExample(null).size();
+	}
+
+	@Override
+	public List<Type> findAllType() {
 		// TODO Auto-generated method stub
 		return mapper.selectByExample(null);
 	}
