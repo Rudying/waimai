@@ -46,7 +46,6 @@ public class UserController {
 		Integer uid = us.getUserId(user.getUsername());
 		us.saveRole(uid);
 	}
-
 	//验证注册的账号是否重复
 	@GetMapping("{username}")
 	public String judge(@PathVariable String username) {

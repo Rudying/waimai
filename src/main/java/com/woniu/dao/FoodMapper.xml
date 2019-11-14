@@ -1,243 +1,296 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.dao.FoodMapper">
-  <resultMap id="BaseResultMap" type="com.woniu.domain.Food">
-    <id column="fid" jdbcType="INTEGER" property="fid" />
-    <result column="tid" jdbcType="INTEGER" property="tid" />
-    <result column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="fname" jdbcType="VARCHAR" property="fname" />
-    <result column="finfo" jdbcType="VARCHAR" property="finfo" />
-    <result column="fphoto" jdbcType="VARCHAR" property="fphoto" />
-    <result column="fprice" jdbcType="DOUBLE" property="fprice" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    fid, tid, sid, fname, finfo, fphoto, fprice
-  </sql>
-  <select id="selectByExample" parameterType="com.woniu.domain.FoodExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from food
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from food
-    where fid = #{fid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from food
-    where fid = #{fid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.woniu.domain.FoodExample">
-    delete from food
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.woniu.domain.Food">
-    insert into food (fid, tid, sid, 
-      fname, finfo, fphoto, 
-      fprice)
-    values (#{fid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, 
-      #{fname,jdbcType=VARCHAR}, #{finfo,jdbcType=VARCHAR}, #{fphoto,jdbcType=VARCHAR}, 
-      #{fprice,jdbcType=DOUBLE})
-  </insert>
-  <insert id="insertSelective" parameterType="com.woniu.domain.Food">
-    insert into food
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="fid != null">
-        fid,
-      </if>
-      <if test="tid != null">
-        tid,
-      </if>
-      <if test="sid != null">
-        sid,
-      </if>
-      <if test="fname != null">
-        fname,
-      </if>
-      <if test="finfo != null">
-        finfo,
-      </if>
-      <if test="fphoto != null">
-        fphoto,
-      </if>
-      <if test="fprice != null">
-        fprice,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="fid != null">
-        #{fid,jdbcType=INTEGER},
-      </if>
-      <if test="tid != null">
-        #{tid,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="fname != null">
-        #{fname,jdbcType=VARCHAR},
-      </if>
-      <if test="finfo != null">
-        #{finfo,jdbcType=VARCHAR},
-      </if>
-      <if test="fphoto != null">
-        #{fphoto,jdbcType=VARCHAR},
-      </if>
-      <if test="fprice != null">
-        #{fprice,jdbcType=DOUBLE},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.woniu.domain.FoodExample" resultType="java.lang.Long">
-    select count(*) from food
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update food
-    <set>
-      <if test="record.fid != null">
-        fid = #{record.fid,jdbcType=INTEGER},
-      </if>
-      <if test="record.tid != null">
-        tid = #{record.tid,jdbcType=INTEGER},
-      </if>
-      <if test="record.sid != null">
-        sid = #{record.sid,jdbcType=INTEGER},
-      </if>
-      <if test="record.fname != null">
-        fname = #{record.fname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.finfo != null">
-        finfo = #{record.finfo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fphoto != null">
-        fphoto = #{record.fphoto,jdbcType=VARCHAR},
-      </if>
-      <if test="record.fprice != null">
-        fprice = #{record.fprice,jdbcType=DOUBLE},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update food
-    set fid = #{record.fid,jdbcType=INTEGER},
-      tid = #{record.tid,jdbcType=INTEGER},
-      sid = #{record.sid,jdbcType=INTEGER},
-      fname = #{record.fname,jdbcType=VARCHAR},
-      finfo = #{record.finfo,jdbcType=VARCHAR},
-      fphoto = #{record.fphoto,jdbcType=VARCHAR},
-      fprice = #{record.fprice,jdbcType=DOUBLE}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.woniu.domain.Food">
-    update food
-    <set>
-      <if test="tid != null">
-        tid = #{tid,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        sid = #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="fname != null">
-        fname = #{fname,jdbcType=VARCHAR},
-      </if>
-      <if test="finfo != null">
-        finfo = #{finfo,jdbcType=VARCHAR},
-      </if>
-      <if test="fphoto != null">
-        fphoto = #{fphoto,jdbcType=VARCHAR},
-      </if>
-      <if test="fprice != null">
-        fprice = #{fprice,jdbcType=DOUBLE},
-      </if>
-    </set>
-    where fid = #{fid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.woniu.domain.Food">
-    update food
-    set tid = #{tid,jdbcType=INTEGER},
-      sid = #{sid,jdbcType=INTEGER},
-      fname = #{fname,jdbcType=VARCHAR},
-      finfo = #{finfo,jdbcType=VARCHAR},
-      fphoto = #{fphoto,jdbcType=VARCHAR},
-      fprice = #{fprice,jdbcType=DOUBLE}
-    where fid = #{fid,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap" type="com.woniu.domain.Food">
+		<id column="fid" jdbcType="INTEGER" property="fid" />
+		<result column="tid" jdbcType="INTEGER" property="tid" />
+		<result column="sid" jdbcType="INTEGER" property="sid" />
+		<result column="fname" jdbcType="VARCHAR" property="fname" />
+		<result column="finfo" jdbcType="VARCHAR" property="finfo" />
+		<result column="fphoto" jdbcType="VARCHAR" property="fphoto" />
+		<result column="fprice" jdbcType="DOUBLE" property="fprice" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		fid, tid, sid, fname, finfo, fphoto, fprice
+	</sql>
+	<select id="selectByExample"
+		parameterType="com.woniu.domain.FoodExample" resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from food
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from food
+		where fid = #{fid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from food
+		where fid = #{fid,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.woniu.domain.FoodExample">
+		delete from food
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.woniu.domain.Food">
+		insert into food (fid, tid, sid,
+		fname, finfo, fphoto,
+		fprice)
+		values (#{fid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER},
+		#{sid,jdbcType=INTEGER},
+		#{fname,jdbcType=VARCHAR}, #{finfo,jdbcType=VARCHAR}, #{fphoto,jdbcType=VARCHAR},
+		#{fprice,jdbcType=DOUBLE})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.woniu.domain.Food">
+		insert into food
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="fid != null">
+				fid,
+			</if>
+			<if test="tid != null">
+				tid,
+			</if>
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="fname != null">
+				fname,
+			</if>
+			<if test="finfo != null">
+				finfo,
+			</if>
+			<if test="fphoto != null">
+				fphoto,
+			</if>
+			<if test="fprice != null">
+				fprice,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="fid != null">
+				#{fid,jdbcType=INTEGER},
+			</if>
+			<if test="tid != null">
+				#{tid,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=INTEGER},
+			</if>
+			<if test="fname != null">
+				#{fname,jdbcType=VARCHAR},
+			</if>
+			<if test="finfo != null">
+				#{finfo,jdbcType=VARCHAR},
+			</if>
+			<if test="fphoto != null">
+				#{fphoto,jdbcType=VARCHAR},
+			</if>
+			<if test="fprice != null">
+				#{fprice,jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.woniu.domain.FoodExample"
+		resultType="java.lang.Long">
+		select count(*) from food
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update food
+		<set>
+			<if test="record.fid != null">
+				fid = #{record.fid,jdbcType=INTEGER},
+			</if>
+			<if test="record.tid != null">
+				tid = #{record.tid,jdbcType=INTEGER},
+			</if>
+			<if test="record.sid != null">
+				sid = #{record.sid,jdbcType=INTEGER},
+			</if>
+			<if test="record.fname != null">
+				fname = #{record.fname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.finfo != null">
+				finfo = #{record.finfo,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fphoto != null">
+				fphoto = #{record.fphoto,jdbcType=VARCHAR},
+			</if>
+			<if test="record.fprice != null">
+				fprice = #{record.fprice,jdbcType=DOUBLE},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update food
+		set fid = #{record.fid,jdbcType=INTEGER},
+		tid = #{record.tid,jdbcType=INTEGER},
+		sid = #{record.sid,jdbcType=INTEGER},
+		fname = #{record.fname,jdbcType=VARCHAR},
+		finfo = #{record.finfo,jdbcType=VARCHAR},
+		fphoto = #{record.fphoto,jdbcType=VARCHAR},
+		fprice = #{record.fprice,jdbcType=DOUBLE}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.woniu.domain.Food">
+		update food
+		<set>
+			<if test="tid != null">
+				tid = #{tid,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				sid = #{sid,jdbcType=INTEGER},
+			</if>
+			<if test="fname != null">
+				fname = #{fname,jdbcType=VARCHAR},
+			</if>
+			<if test="finfo != null">
+				finfo = #{finfo,jdbcType=VARCHAR},
+			</if>
+			<if test="fphoto != null">
+				fphoto = #{fphoto,jdbcType=VARCHAR},
+			</if>
+			<if test="fprice != null">
+				fprice = #{fprice,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where fid = #{fid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.woniu.domain.Food">
+		update food
+		set tid = #{tid,jdbcType=INTEGER},
+		sid = #{sid,jdbcType=INTEGER},
+		fname = #{fname,jdbcType=VARCHAR},
+		finfo = #{finfo,jdbcType=VARCHAR},
+		fphoto = #{fphoto,jdbcType=VARCHAR},
+		fprice = #{fprice,jdbcType=DOUBLE}
+		where fid = #{fid,jdbcType=INTEGER}
+	</update>
+
+
+
+	<select id="findAll" resultMap="rm">
+		SELECT * FROM food f JOIN TYPE t
+		ON f.`tid`=t.`tid`
+		JOIN shop s
+		ON f.`sid`=s.`sid`
+	</select>
+	<resultMap type="com.woniu.domain.Food" id="rm">
+		<id property="fid" column="fid"></id>
+		<result property="fname" column="fname" />
+		<result property="finfo" column="finfo" />
+		<result property="fphoto" column="fphoto" />
+		<result property="fprice" column="fprice" />
+		<result property="tid" column="tid" />
+		<result property="sid" column="sid" />
+		<association property="type"
+			javaType="com.woniu.domain.Type">
+			<id property="tid" column="tid" />
+			<result property="tname" column="tname" />
+			<result property="tphoto" column="tphoto" />
+			<result property="tinfo" column="tinfo" />
+		</association>
+		<association property="shop"
+			javaType="com.woniu.domain.Shop">
+			<id property="sid" column="sid" />
+			<result property="sname" column="sname" />
+			<result property="sinfo" column="sinfo" />
+			<result property="stel" column="stel" />
+			<result property="saddress" column="saddress" />
+			<result property="opentime" column="opentime" />
+			<result property="closetime" column="closetime" />
+			<result property="sstatus" column="sstatus" />
+			<result property="coin" column="coin" />
+		</association>
+	</resultMap>
 </mapper>

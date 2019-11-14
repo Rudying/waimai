@@ -2,6 +2,7 @@ package com.woniu.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 public class Shop implements Serializable {
     private Integer sid;
@@ -23,6 +24,36 @@ public class Shop implements Serializable {
     private Integer sstatus;
 
     private Integer coin;
+    
+    private Set<Advice> advices;
+    
+    private Users users;
+    
+    private Set<Food> foods;
+    
+    public Set<Food> getFoods() {
+		return foods;
+	}
+
+	public void setFoods(Set<Food> foods) {
+		this.foods = foods;
+	}
+    
+    public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	public Set<Advice> getAdvices() {
+		return advices;
+	}
+
+	public void setAdvices(Set<Advice> advices) {
+		this.advices = advices;
+	}
 
     private static final long serialVersionUID = 1L;
 

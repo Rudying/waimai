@@ -1,6 +1,7 @@
 package com.woniu.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public class Type implements Serializable {
     private Integer tid;
@@ -10,8 +11,18 @@ public class Type implements Serializable {
     private String tphoto;
 
     private String tinfo;
+    
+    private Set<Food> foods;
+    
+    public Set<Food> getFoods() {
+		return foods;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setFoods(Set<Food> foods) {
+		this.foods = foods;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getTid() {
         return tid;

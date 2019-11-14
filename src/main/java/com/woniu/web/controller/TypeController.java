@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -60,7 +60,6 @@ public class TypeController {
 		s.deleteCharAt(s.length()-1);
 		type.setTphoto(s.toString());
 		ts.save(type);
-	
 	}
 	
 	// 删除   
@@ -69,16 +68,52 @@ public class TypeController {
 		ts.delete(tid);
 	}
 
-	// 查询所有
-	@GetMapping
-	public List<Type> findAll() {
-		return ts.findAll();
+	// 分页
+	@PostMapping("find")
+	public List<Type> findAll(Integer offset,Integer limit) {
+		System.out.println(offset+":"+limit);
+		return ts.findAll((offset-1)*limit,limit);
+		
+	}
+	//查询到的所有行数
+	@PostMapping("count")
+	public Integer count() {
+		return ts.findCount();	
 	}
 
 	// 修改
-	@PutMapping
-	public void update(@RequestBody Type t) {
-		ts.update(t);
+	@RequestMapping("update")
+	public void update(Type type,MultipartFile photo,HttpServletRequest req) {	
+		//删除旧图
+		String path = req.getServletContext().getRealPath("/images");
+		String oldFile = ts.findOne(type.getTid()).getTphoto();
+		if (oldFile != null) {
+			File temp = new File(path, oldFile);
+			temp.delete();
+		}
+		//添加新图
+		
+		StringBuilder s = new StringBuilder();	
+		String OldName = photo.getOriginalFilename();
+		int lastDot = OldName.lastIndexOf(".");
+		String ext = OldName.substring(lastDot); 	
+		String newName = UUID.randomUUID().toString().replace("-", "")+ext;	
+		File dir = new File(path);
+		if(!dir.exists()){
+			dir.mkdirs();
+		}
+		
+		try {
+			photo.transferTo(new File(path,newName));
+		} catch (IllegalStateException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		s.append(newName);
+		s.append(",");
+		s.deleteCharAt(s.length()-1);
+		type.setTphoto(s.toString());
+		ts.update(type);
 	}
 
 }
