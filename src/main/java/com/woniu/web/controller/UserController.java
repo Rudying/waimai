@@ -111,9 +111,10 @@ public class UserController {
 	}
 
 	// 查询所有
-	@GetMapping
-	public List<Users> findAll() {
-		return us.findAll();
+	@PostMapping("/aaa")
+	public String findAll(@RequestBody String loginName) {
+		System.out.println("UserController.findAll()"+loginName);
+		return "123";
 	}
 
 	// 修改

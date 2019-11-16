@@ -4,6 +4,7 @@ import com.woniu.domain.Type;
 import com.woniu.domain.TypeExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface TypeMapper {
     long countByExample(TypeExample example);
@@ -16,6 +17,8 @@ public interface TypeMapper {
 
     int insertSelective(Type record);
 
+    List<Type> selectByExample(TypeExample example,RowBounds rb);
+    
     List<Type> selectByExample(TypeExample example);
 
     Type selectByPrimaryKey(Integer tid);
