@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,6 +68,7 @@ public class FoodController {
 	// 查询所有
 	@PostMapping("find")
 	public List<Food> findAll(Integer limit,Integer offset) {
+		
 		return fs.findAll((offset-1)*limit,limit);
 	}
 	

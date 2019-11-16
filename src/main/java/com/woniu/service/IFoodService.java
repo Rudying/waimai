@@ -1,9 +1,6 @@
 package com.woniu.service;
 
 import java.util.List;
-
-import org.apache.ibatis.session.RowBounds;
-
 import com.woniu.domain.Food;
 
 
