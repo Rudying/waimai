@@ -22,8 +22,18 @@ public class Users implements Serializable {
     
     private Set<Advice> advices;
     
+    private Set<UserAddress> address;
+    
     private Shop shop;
     
+	public Set<UserAddress> getAddress() {
+		return address;
+	}
+
+	public void setAddress(Set<UserAddress> address) {
+		this.address = address;
+	}
+
 	public Shop getShop() {
 		return shop;
 	}

@@ -43,8 +43,7 @@ public class UserController {
 	@PostMapping
 	public void test(@RequestBody Users user) {
 		//设置盐
-		user.setSalt("wm");
-		
+		user.setSalt("wm");		
 		SimpleHash sh = new SimpleHash("md5", user.getPassword(), user.getSalt(), 1024);
 		String hex = sh.toHex();
 		user.setPassword(hex);
@@ -105,10 +104,15 @@ public class UserController {
 		}
 	}
 
-	// 删除   
-	@DeleteMapping("{uid}")   
+	// 重置密码   
+	@PostMapping("{uid}")   
 	public void delete(@PathVariable Integer uid) {
-		us.delete(uid);
+		Users u=new Users();
+		u.setUid(uid);	
+		SimpleHash sh = new SimpleHash("md5", "0000", "wm", 1024);
+		String hex = sh.toHex();
+		u.setPassword(hex);
+		us.update(u);
 	}
 
 	// 查询所有

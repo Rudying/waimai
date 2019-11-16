@@ -14,8 +14,18 @@ public class UserAddress implements Serializable {
     private String uinfo;
 
     private String tel;
+    
+    private Users  users;
+    
+	public Users getUsers() {
+		return users;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getUaid() {
         return uaid;

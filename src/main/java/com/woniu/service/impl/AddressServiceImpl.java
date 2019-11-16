@@ -49,4 +49,10 @@ private UserAddressMapper mapper;
 		return mapper.selectByExample(null);
 	}
 
+	@Override
+	public List<UserAddress> findUserAndAddress() {
+		// TODO Auto-generated method stub
+		return mapper.findAll();
+	}
+
 }

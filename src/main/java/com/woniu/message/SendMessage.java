@@ -7,20 +7,21 @@ import org.apache.http.HttpResponse;
 
 public class SendMessage {
 	public static void main(String[] args) {
-	    String host = "https://dxyzm.market.alicloudapi.com";
-	    String path = "/chuangxin/dxjk";
+	    String host = "http://dingxin.market.alicloudapi.com";
+	    String path = "/dx/sendSms";
 	    String method = "POST";
 	    String appcode = "a1e8961ce5844303b4fcadd1673ae60c";
 	    Map<String, String> headers = new HashMap<String, String>();
 	    //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
 	    headers.put("Authorization", "APPCODE " + appcode);
 	    Map<String, String> querys = new HashMap<String, String>();
-	    //测试可用默认短信模板,测试模板为专用模板不可修改,如需自定义短信内容或改动任意字符,请联系旺旺或QQ726980650进行申请
-        querys.put("content", "验证码为：1456");
-	    querys.put("mobile", "15291805513");
+	    querys.put("mobile", "15719188191");
+	    querys.put("param", "code:1234");
+	    querys.put("tpl_id", "TP1711063");
 	    Map<String, String> bodys = new HashMap<String, String>();
-	    
-            try {
+
+
+	    try {
 	    	/**
 	    	* 重要提示如下:
 	    	* HttpUtils请从
