@@ -80,6 +80,13 @@ public class TypeController {
 	public Integer count() {
 		return ts.findCount();	
 	}
+	
+	//菜品管理首页需要查询到所有type
+	@GetMapping
+	public List<Type>find(){
+		return ts.findAllType();
+		
+	}
 
 	// 修改
 	@RequestMapping("update")

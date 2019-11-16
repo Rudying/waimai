@@ -58,4 +58,10 @@ private TypeMapper mapper;
 		return mapper.selectByExample(null).size();
 	}
 
+	@Override
+	public List<Type> findAllType() {
+		// TODO Auto-generated method stub
+		return mapper.selectByExample(null);
+	}
+
 }

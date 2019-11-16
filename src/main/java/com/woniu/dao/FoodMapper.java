@@ -4,6 +4,7 @@ import com.woniu.domain.Food;
 import com.woniu.domain.FoodExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 public interface FoodMapper {
     long countByExample(FoodExample example);
@@ -28,5 +29,5 @@ public interface FoodMapper {
 
     int updateByPrimaryKey(Food record);
     
-    List<Food> findAll();
+    List<Food> findAll(RowBounds rb);
 }
