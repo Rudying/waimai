@@ -12,4 +12,5 @@ public interface ITypeService {
    Type findOne(Integer id);
    List<Type> findAll(Integer currentPage, Integer pageSize);
    Integer findCount();
+   List<Type>findAllType();
 }

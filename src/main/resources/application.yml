@@ -13,6 +13,9 @@ spring:
       max-request-size: 100MB
       enabled: true
       resolve-lazily: false
-      
+
+#mybatis的配置文件在那里    
+mybatis:
+  config-location: classpath:mybatisConfig.xml    
       
      
