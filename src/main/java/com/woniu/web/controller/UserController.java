@@ -119,6 +119,7 @@ public class UserController {
 			//获得当前登录账号 subject.getPrincipal()
 			Object principal = subject.getPrincipal();
 			map2.put("loginName", principal);
+			
 		}
 		return map2;
 	}
