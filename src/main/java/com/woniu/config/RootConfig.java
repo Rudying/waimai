@@ -3,6 +3,7 @@ package com.woniu.config;
 import java.util.EventListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.sql.DataSource;
 
@@ -15,6 +16,7 @@ import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.alibaba.druid.pool.DruidDataSource;
+import com.woniu.page.PageInterceptor;
 import com.woniu.util.WebSessionLisener;
 
 @Configuration
@@ -26,6 +28,7 @@ public class RootConfig {
 		s.setListener(new WebSessionLisener());
 		return s;
 	}
+	
 	
 	
 	@Bean //配置数据源

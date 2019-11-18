@@ -70,6 +70,7 @@ public class FoodController {
 	// 查询所有
 	@PostMapping("find")
 	public List<Food> findAll(Integer limit,Integer offset) {
+		
 		return fs.findAll((offset-1)*limit,limit);
 	}
 	
