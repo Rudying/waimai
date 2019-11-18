@@ -120,6 +120,7 @@ public class UserController {
 			Object principal = subject.getPrincipal();
 			map2.put("loginName", principal);
 			
+			
 		}
 		return map2;
 	}
