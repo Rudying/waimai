@@ -1,196 +1,259 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.woniu.dao.CollectionMapper">
-  <resultMap id="BaseResultMap" type="com.woniu.domain.Collection">
-    <id column="coid" jdbcType="INTEGER" property="coid" />
-    <result column="uid" jdbcType="INTEGER" property="uid" />
-    <result column="sid" jdbcType="INTEGER" property="sid" />
-    <result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    coid, uid, sid, ctime
-  </sql>
-  <select id="selectByExample" parameterType="com.woniu.domain.CollectionExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from collection
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from collection
-    where coid = #{coid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from collection
-    where coid = #{coid,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.woniu.domain.CollectionExample">
-    delete from collection
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.woniu.domain.Collection">
-    insert into collection (coid, uid, sid, 
-      ctime)
-    values (#{coid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{sid,jdbcType=INTEGER}, 
-      #{ctime,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.woniu.domain.Collection">
-    insert into collection
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="coid != null">
-        coid,
-      </if>
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="sid != null">
-        sid,
-      </if>
-      <if test="ctime != null">
-        ctime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="coid != null">
-        #{coid,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="ctime != null">
-        #{ctime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.woniu.domain.CollectionExample" resultType="java.lang.Long">
-    select count(*) from collection
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update collection
-    <set>
-      <if test="record.coid != null">
-        coid = #{record.coid,jdbcType=INTEGER},
-      </if>
-      <if test="record.uid != null">
-        uid = #{record.uid,jdbcType=INTEGER},
-      </if>
-      <if test="record.sid != null">
-        sid = #{record.sid,jdbcType=INTEGER},
-      </if>
-      <if test="record.ctime != null">
-        ctime = #{record.ctime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update collection
-    set coid = #{record.coid,jdbcType=INTEGER},
-      uid = #{record.uid,jdbcType=INTEGER},
-      sid = #{record.sid,jdbcType=INTEGER},
-      ctime = #{record.ctime,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.woniu.domain.Collection">
-    update collection
-    <set>
-      <if test="uid != null">
-        uid = #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="sid != null">
-        sid = #{sid,jdbcType=INTEGER},
-      </if>
-      <if test="ctime != null">
-        ctime = #{ctime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where coid = #{coid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.woniu.domain.Collection">
-    update collection
-    set uid = #{uid,jdbcType=INTEGER},
-      sid = #{sid,jdbcType=INTEGER},
-      ctime = #{ctime,jdbcType=TIMESTAMP}
-    where coid = #{coid,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap"
+		type="com.woniu.domain.Collection">
+		<id column="coid" jdbcType="INTEGER" property="coid" />
+		<result column="uid" jdbcType="INTEGER" property="uid" />
+		<result column="sid" jdbcType="INTEGER" property="sid" />
+		<result column="ctime" jdbcType="TIMESTAMP" property="ctime" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value"
+										item="listItem" open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		coid, uid, sid, ctime
+	</sql>
+	<select id="selectByExample"
+		parameterType="com.woniu.domain.CollectionExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from collection
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from collection
+		where coid = #{coid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from collection
+		where coid =
+		#{coid,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.woniu.domain.CollectionExample">
+		delete from collection
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.woniu.domain.Collection">
+		insert into collection (coid,
+		uid, sid,
+		ctime)
+		values (#{coid,jdbcType=INTEGER},
+		#{uid,jdbcType=INTEGER},
+		#{sid,jdbcType=INTEGER},
+		#{ctime,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.woniu.domain.Collection">
+		insert into collection
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="coid != null">
+				coid,
+			</if>
+			<if test="uid != null">
+				uid,
+			</if>
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="ctime != null">
+				ctime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="coid != null">
+				#{coid,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=INTEGER},
+			</if>
+			<if test="ctime != null">
+				#{ctime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.woniu.domain.CollectionExample"
+		resultType="java.lang.Long">
+		select count(*) from collection
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update collection
+		<set>
+			<if test="record.coid != null">
+				coid = #{record.coid,jdbcType=INTEGER},
+			</if>
+			<if test="record.uid != null">
+				uid = #{record.uid,jdbcType=INTEGER},
+			</if>
+			<if test="record.sid != null">
+				sid = #{record.sid,jdbcType=INTEGER},
+			</if>
+			<if test="record.ctime != null">
+				ctime = #{record.ctime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update collection
+		set coid = #{record.coid,jdbcType=INTEGER},
+		uid =
+		#{record.uid,jdbcType=INTEGER},
+		sid = #{record.sid,jdbcType=INTEGER},
+		ctime = #{record.ctime,jdbcType=TIMESTAMP}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.woniu.domain.Collection">
+		update collection
+		<set>
+			<if test="uid != null">
+				uid = #{uid,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null">
+				sid = #{sid,jdbcType=INTEGER},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where coid = #{coid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.woniu.domain.Collection">
+		update collection
+		set uid = #{uid,jdbcType=INTEGER},
+		sid =
+		#{sid,jdbcType=INTEGER},
+		ctime = #{ctime,jdbcType=TIMESTAMP}
+		where coid
+		= #{coid,jdbcType=INTEGER}
+	</update>
+
+
+
+	<select id="findAll" resultMap="rm">
+		SELECT*FROM collection c JOIN
+		users u
+		ON c.`uid`=u.`uid`
+		JOIN shop s ON c.`sid`=s.`sid`
+	</select>
+	<resultMap type="com.woniu.domain.Collection" id="rm">
+		<id property="coid" column="coid"></id>
+		<result property="uid" column="uid" />
+		<result property="sid" column="sid" />
+		<result property="ctime" column="ctime" />
+		<association property="user"
+			javaType="com.woniu.domain.Users">
+			<id property="uid" column="uid" />
+			<result property="username" column="username" />
+			<result property="password" column="password" />
+			<result property="sex" column="sex" />
+			<result property="photo" column="photo" />
+			<result property="nickname" column="nickname" />
+			<result property="email" column="email" />
+		</association>
+		<association property="shop"
+			javaType="com.woniu.domain.Shop">
+			<id property="sid" column="sid" />
+			<result property="sname" column="sname" />
+			<result property="sinfo" column="sinfo" />
+			<result property="stel" column="stel" />
+			<result property="saddress" column="saddress" />
+			<result property="opentime" column="opentime" />
+			<result property="closetime" column="closetime" />
+			<result property="sstatus" column="sstatus" />
+			<result property="coin" column="coin" />
+		</association>
+	</resultMap>
 </mapper>

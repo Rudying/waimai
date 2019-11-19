@@ -11,8 +11,28 @@ public class Collection implements Serializable {
     private Integer sid;
 
     private Date ctime;
+    
+    private Users user;
+    
+    private Shop shop;
+    
+    public Users getUser() {
+		return user;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getCoid() {
         return coid;

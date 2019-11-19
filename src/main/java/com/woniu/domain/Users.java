@@ -26,6 +26,26 @@ public class Users implements Serializable {
     
     private Shop shop;
     
+    private Set<Collection> collection;
+    
+    private Set<Comment> comment;
+    
+	public Set<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
+	}
+
+	public Set<Collection> getCollection() {
+		return collection;
+	}
+
+	public void setCollection(Set<Collection> collection) {
+		this.collection = collection;
+	}
+
 	public Set<UserAddress> getAddress() {
 		return address;
 	}

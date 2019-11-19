@@ -2,6 +2,7 @@ package com.woniu.config;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.sql.DataSource;
 
@@ -14,6 +15,7 @@ import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import com.alibaba.druid.pool.DruidDataSource;
+import com.woniu.page.PageInterceptor;
 import com.woniu.util.WebSessionLisener;
 
 @Configuration
@@ -26,14 +28,13 @@ public class RootConfig {
 		return s;
 	}
 	
-	
 	@Bean //配置数据源
 	public DataSource ds() {
 		DruidDataSource ds = new DruidDataSource();
 		ds.setDriverClassName("com.mysql.jdbc.Driver");
 		ds.setUrl("jdbc:mysql://localhost:3306/waimai?characterEncoding=utf8");
 		ds.setUsername("root");
-		ds.setPassword("212212");
+		ds.setPassword("root");
 		return ds;
 	}
 	

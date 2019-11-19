@@ -46,5 +46,14 @@ public class CommentController {
 	public void update(@RequestBody Comment c) {
 		cs.update(c);
 	}
+	
+	//审核处理
+	@PostMapping("deal")
+	public void deal(Integer cstatus,Integer cid) {
+		Comment comment = new Comment();
+		comment.setCid(cid);
+		comment.setCstatus(cstatus==0?1:0);
+		cs.update(comment);
+	}
 
 }

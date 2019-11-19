@@ -46,7 +46,7 @@ private CollectionMapper mapper;
 	@Override
 	public List<Collection> findAll() {
 		// TODO Auto-generated method stub
-		return mapper.selectByExample(null);
+		return mapper.findAll();
 	}
 
 }

@@ -19,8 +19,28 @@ public class Comment implements Serializable {
     private Integer ccoin;
 
     private Integer cstatus;
+    
+    private Users user;
+    
+    private Food food;
+   
+	public Users getUser() {
+		return user;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	public Food getFood() {
+		return food;
+	}
+
+	public void setFood(Food food) {
+		this.food = food;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getCid() {
         return cid;

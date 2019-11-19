@@ -1,27 +1,38 @@
 package com.woniu.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
 public class Food implements Serializable {
-    private Integer fid;
+	private Integer fid;
 
-    private Integer tid;
+	private Integer tid;
 
-    private Integer sid;
+	private Integer sid;
 
-    private String fname;
+	private String fname;
 
-    private String finfo;
+	private String finfo;
 
-    private String fphoto;
+	private String fphoto;
 
-    private Double fprice;
-    
-    private Shop shop;
-    
-    private Type type;
-    
-    public Shop getShop() {
+	private Double fprice;
+
+	private Shop shop;
+
+	private Type type;
+
+	private Set<Comment> comment;
+
+	public Set<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
+	}
+
+	public Shop getShop() {
 		return shop;
 	}
 
@@ -39,59 +50,59 @@ public class Food implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-    public Integer getFid() {
-        return fid;
-    }
+	public Integer getFid() {
+		return fid;
+	}
 
-    public void setFid(Integer fid) {
-        this.fid = fid;
-    }
+	public void setFid(Integer fid) {
+		this.fid = fid;
+	}
 
-    public Integer getTid() {
-        return tid;
-    }
+	public Integer getTid() {
+		return tid;
+	}
 
-    public void setTid(Integer tid) {
-        this.tid = tid;
-    }
+	public void setTid(Integer tid) {
+		this.tid = tid;
+	}
 
-    public Integer getSid() {
-        return sid;
-    }
+	public Integer getSid() {
+		return sid;
+	}
 
-    public void setSid(Integer sid) {
-        this.sid = sid;
-    }
+	public void setSid(Integer sid) {
+		this.sid = sid;
+	}
 
-    public String getFname() {
-        return fname;
-    }
+	public String getFname() {
+		return fname;
+	}
 
-    public void setFname(String fname) {
-        this.fname = fname == null ? null : fname.trim();
-    }
+	public void setFname(String fname) {
+		this.fname = fname == null ? null : fname.trim();
+	}
 
-    public String getFinfo() {
-        return finfo;
-    }
+	public String getFinfo() {
+		return finfo;
+	}
 
-    public void setFinfo(String finfo) {
-        this.finfo = finfo == null ? null : finfo.trim();
-    }
+	public void setFinfo(String finfo) {
+		this.finfo = finfo == null ? null : finfo.trim();
+	}
 
-    public String getFphoto() {
-        return fphoto;
-    }
+	public String getFphoto() {
+		return fphoto;
+	}
 
-    public void setFphoto(String fphoto) {
-        this.fphoto = fphoto == null ? null : fphoto.trim();
-    }
+	public void setFphoto(String fphoto) {
+		this.fphoto = fphoto == null ? null : fphoto.trim();
+	}
 
-    public Double getFprice() {
-        return fprice;
-    }
+	public Double getFprice() {
+		return fprice;
+	}
 
-    public void setFprice(Double fprice) {
-        this.fprice = fprice;
-    }
+	public void setFprice(Double fprice) {
+		this.fprice = fprice;
+	}
 }

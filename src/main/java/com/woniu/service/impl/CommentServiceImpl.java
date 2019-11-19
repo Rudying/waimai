@@ -27,7 +27,7 @@ private CommentMapper mapper;
 		// TODO Auto-generated method stub
 		mapper.deleteByPrimaryKey(id);
 	}
-
+	
 	@Transactional
 	@Override
 	public void update(Comment t) {
@@ -46,7 +46,7 @@ private CommentMapper mapper;
 	@Override
 	public List<Comment> findAll() {
 		// TODO Auto-generated method stub
-		return mapper.selectByExample(null);
+		return mapper.findAll();
 	}
 
 }
