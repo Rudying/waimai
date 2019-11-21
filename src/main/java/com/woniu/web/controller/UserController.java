@@ -31,7 +31,7 @@ import com.woniu.service.IUserService;
 
 @RestController
 @RequestMapping("users")
-public class UserController {
+public  class UserController {
 	@Autowired
 	private IUserService us;
 	
@@ -80,15 +80,15 @@ public class UserController {
 	// 注册
 	@PostMapping("{yzm}")
 	public String test(@RequestBody Users user,@PathVariable String yzm) {
-		Integer uid = us.getUserId(user.getUsername());
 		if(yzm.equals(redisTemplate.opsForValue().get(user.getPhoto()))) {
-			redisTemplate.opsForValue().set(user.getPhoto(), null);
 			//设置盐
 			user.setSalt("wm");
 			SimpleHash sh = new SimpleHash("md5", user.getPassword(), user.getSalt(), 1024);
 			String hex = sh.toHex();
 			user.setPassword(hex);
 			us.save(user);
+			//UserMapper.xml 中添加了获取id的属性： useGeneratedKeys="true" keyProperty="uid"
+			Integer uid = user.getUid();
 			us.saveRole(uid);
 			return "true";
 		}else {
@@ -119,8 +119,6 @@ public class UserController {
 			//获得当前登录账号 subject.getPrincipal()
 			Object principal = subject.getPrincipal();
 			map2.put("loginName", principal);
-			
-			
 		}
 		return map2;
 	}
