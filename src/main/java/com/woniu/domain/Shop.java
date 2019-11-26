@@ -32,7 +32,16 @@ public class Shop implements Serializable {
 	private Set<Food> foods;
 
 	private Set<Collection> collection;
+	
+    private Set<Orders> orders;
+    
+	public Set<Orders> getOrders() {
+		return orders;
+	}
 
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
+	}
 	public Set<Collection> getCollection() {
 		return collection;
 	}

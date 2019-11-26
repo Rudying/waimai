@@ -31,7 +31,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -63,7 +64,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -81,7 +83,8 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		sid, uid, sname, sinfo, stel, saddress, opentime, closetime, sstatus, coin
+		sid, uid, sname, sinfo, stel, saddress, opentime,
+		closetime, sstatus, coin
 	</sql>
 	<select id="selectByExample"
 		parameterType="com.woniu.domain.ShopExample" resultMap="BaseResultMap">
@@ -118,13 +121,16 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.woniu.domain.Shop">
-		insert into shop (sid, uid, sname,
+		insert into shop (sid, uid,
+		sname,
 		sinfo, stel, saddress,
 		opentime, closetime, sstatus,
 		coin)
-		values (#{sid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER},
+		values
+		(#{sid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER},
 		#{sname,jdbcType=VARCHAR},
-		#{sinfo,jdbcType=VARCHAR}, #{stel,jdbcType=VARCHAR}, #{saddress,jdbcType=VARCHAR},
+		#{sinfo,jdbcType=VARCHAR},
+		#{stel,jdbcType=VARCHAR}, #{saddress,jdbcType=VARCHAR},
 		#{opentime,jdbcType=TIMESTAMP}, #{closetime,jdbcType=TIMESTAMP},
 		#{sstatus,jdbcType=INTEGER},
 		#{coin,jdbcType=INTEGER})
@@ -246,15 +252,24 @@
 	<update id="updateByExample" parameterType="map">
 		update shop
 		set sid = #{record.sid,jdbcType=INTEGER},
-		uid = #{record.uid,jdbcType=INTEGER},
-		sname = #{record.sname,jdbcType=VARCHAR},
-		sinfo = #{record.sinfo,jdbcType=VARCHAR},
-		stel = #{record.stel,jdbcType=VARCHAR},
-		saddress = #{record.saddress,jdbcType=VARCHAR},
-		opentime = #{record.opentime,jdbcType=TIMESTAMP},
-		closetime = #{record.closetime,jdbcType=TIMESTAMP},
-		sstatus = #{record.sstatus,jdbcType=INTEGER},
-		coin = #{record.coin,jdbcType=INTEGER}
+		uid =
+		#{record.uid,jdbcType=INTEGER},
+		sname =
+		#{record.sname,jdbcType=VARCHAR},
+		sinfo =
+		#{record.sinfo,jdbcType=VARCHAR},
+		stel =
+		#{record.stel,jdbcType=VARCHAR},
+		saddress =
+		#{record.saddress,jdbcType=VARCHAR},
+		opentime =
+		#{record.opentime,jdbcType=TIMESTAMP},
+		closetime =
+		#{record.closetime,jdbcType=TIMESTAMP},
+		sstatus =
+		#{record.sstatus,jdbcType=INTEGER},
+		coin =
+		#{record.coin,jdbcType=INTEGER}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -297,12 +312,15 @@
 		parameterType="com.woniu.domain.Shop">
 		update shop
 		set uid = #{uid,jdbcType=INTEGER},
-		sname = #{sname,jdbcType=VARCHAR},
+		sname =
+		#{sname,jdbcType=VARCHAR},
 		sinfo = #{sinfo,jdbcType=VARCHAR},
-		stel = #{stel,jdbcType=VARCHAR},
+		stel =
+		#{stel,jdbcType=VARCHAR},
 		saddress = #{saddress,jdbcType=VARCHAR},
 		opentime = #{opentime,jdbcType=TIMESTAMP},
-		closetime = #{closetime,jdbcType=TIMESTAMP},
+		closetime =
+		#{closetime,jdbcType=TIMESTAMP},
 		sstatus = #{sstatus,jdbcType=INTEGER},
 		coin = #{coin,jdbcType=INTEGER}
 		where sid = #{sid,jdbcType=INTEGER}
@@ -311,7 +329,8 @@
 
 
 	<select id="findShopBySid" resultMap="rm">
-		SELECT * FROM shop WHERE sid=#{sid}
+		SELECT * FROM shop WHERE
+		sid=#{sid}
 	</select>
 	<resultMap type="com.woniu.domain.Shop" id="rm">
 		<id property="sid" column="sid" />
@@ -323,5 +342,25 @@
 		<result property="closetime" column="closetime" />
 		<result property="sstatus" column="sstatus" />
 		<result property="coin" column="coin" />
+	</resultMap>
+
+
+	<select id="findAll" resultMap="rm2">
+		SELECT *FROM shop s JOIN users u
+		ON s.`uid`=u.`uid`
+	</select>
+	<resultMap type="com.woniu.domain.Shop" id="rm2">
+		<id property="sid" column="sid" />
+		<result property="sname" column="sname" />
+		<result property="sinfo" column="sinfo" />
+		<result property="stel" column="stel" />
+		<result property="saddress" column="saddress" />
+		<result property="opentime" column="opentime" />
+		<result property="closetime" column="closetime" />
+		<result property="sstatus" column="sstatus" />
+		<result property="coin" column="coin" />
+		<collection property="users" column="uid"
+			select="com.woniu.dao.UsersMapper.findUserByUid">
+		</collection>
 	</resultMap>
 </mapper>

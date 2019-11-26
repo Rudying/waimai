@@ -46,7 +46,7 @@ private ShopMapper mapper;
 	@Override
 	public List<Shop> findAll() {
 		// TODO Auto-generated method stub
-		return mapper.selectByExample(null);
+		return mapper.findAll();
 	}
 
 }

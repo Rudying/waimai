@@ -29,4 +29,6 @@ public interface ShopMapper {
     int updateByPrimaryKey(Shop record);
     
     Shop findShopBySid(Integer sid);
+    
+    List<Shop> findAll();
 }

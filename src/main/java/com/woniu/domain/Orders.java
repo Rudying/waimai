@@ -2,6 +2,7 @@ package com.woniu.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 public class Orders implements Serializable {
     private Integer oid;
@@ -19,8 +20,38 @@ public class Orders implements Serializable {
     private String omessage;
 
     private Integer ostatus;
+    
+    private Users user;
+    
+    private Shop shop;
+    
+    private Set<Element> elements;
+    
+    public Set<Element> getElements() {
+		return elements;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setElements(Set<Element> elements) {
+		this.elements = elements;
+	}
+
+	public Users getUser() {
+		return user;
+	}
+
+	public void setUser(Users user) {
+		this.user = user;
+	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getOid() {
         return oid;

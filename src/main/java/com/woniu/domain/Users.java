@@ -30,6 +30,16 @@ public class Users implements Serializable {
     
     private Set<Comment> comment;
     
+    private Set<Orders> orders;
+      
+	public Set<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
+	}
+
 	public Set<Comment> getComment() {
 		return comment;
 	}

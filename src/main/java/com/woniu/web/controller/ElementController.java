@@ -46,5 +46,11 @@ public class ElementController {
 	public void update(@RequestBody Element e) {
 		es.update(e);
 	}
+	
+	//根据订单号查询订单项
+	@PostMapping("search")
+	public List<Element> findElementByOnumber(String num){
+		return es.findElementByOnumber(num);	
+	}
 
 }

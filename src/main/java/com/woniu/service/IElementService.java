@@ -11,4 +11,5 @@ public interface IElementService {
    void update(Element t);
    Element findOne(Integer id);
    List<Element> findAll();
+   List<Element> findElementByOnumber(String num);
 }

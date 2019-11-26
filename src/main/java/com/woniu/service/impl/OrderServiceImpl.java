@@ -46,7 +46,7 @@ private OrdersMapper mapper;
 	@Override
 	public List<Orders> findAll() {
 		// TODO Auto-generated method stub
-		return mapper.selectByExample(null);
+		return mapper.findAll();
 	}
 
 }

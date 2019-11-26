@@ -14,8 +14,18 @@ public class Element implements Serializable {
     private String fphoto;
 
     private Integer ecount;
+    
+    private Orders order;
+    
+	public Orders getOrder() {
+		return order;
+	}
 
-    private static final long serialVersionUID = 1L;
+	public void setOrder(Orders order) {
+		this.order = order;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public Integer getEid() {
         return eid;

@@ -46,7 +46,15 @@ private ElementMapper mapper;
 	@Override
 	public List<Element> findAll() {
 		// TODO Auto-generated method stub
-		return mapper.selectByExample(null);
+		return mapper.findAll();
 	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public List<Element> findElementByOnumber(String num) {
+		// TODO Auto-generated method stub
+		return mapper.findElementByOnumber(num);
+	}
+
 
 }

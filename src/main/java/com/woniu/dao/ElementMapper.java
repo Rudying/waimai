@@ -27,4 +27,8 @@ public interface ElementMapper {
     int updateByPrimaryKeySelective(Element record);
 
     int updateByPrimaryKey(Element record);
+    
+    List<Element> findAll();
+    
+    List<Element> findElementByOnumber(String num);
 }

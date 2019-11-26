@@ -162,8 +162,8 @@ public class UserController {
 
 	// 查询所有
 	@GetMapping()
-	public String findAll() {
-		return "123";
+	public List<Users> findAll() {
+		return us.findAll();
 	}
 
 	// 修改
