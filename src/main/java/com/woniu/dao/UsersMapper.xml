@@ -126,7 +126,8 @@
 		#{email,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
 	</insert>
 	<insert id="insertSelective"
-		parameterType="com.woniu.domain.Users">
+		parameterType="com.woniu.domain.Users" useGeneratedKeys="true"
+		keyProperty="uid">
 		insert into users
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="uid != null">
