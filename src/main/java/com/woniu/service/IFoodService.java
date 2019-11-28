@@ -12,4 +12,5 @@ public interface IFoodService {
    List<Food> findAll(Integer currentPage, Integer pageSize);
    List<Food> findBySid(Integer currentPage, Integer pageSize,Integer sid);
    Integer findCount();
+   List<Food> findByTid(Integer tid);
 }

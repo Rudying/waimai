@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.woniu.dao.FoodMapper;
 import com.woniu.domain.Food;
+import com.woniu.domain.FoodExample;
+import com.woniu.domain.FoodExample.Criteria;
 import com.woniu.service.IFoodService;
 @Service
 public class FoodServiceImpl implements IFoodService{
@@ -62,6 +64,12 @@ private FoodMapper mapper;
 	public Integer findCount() {
 		// TODO Auto-generated method stub
 		return mapper.selectByExample(null).size();
+	}
+
+	@Override
+	public List<Food> findByTid(Integer tid) {
+		// TODO Auto-generated method stub
+		return mapper.findByTid(tid);
 	}
 
 

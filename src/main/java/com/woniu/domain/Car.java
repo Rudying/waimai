@@ -94,4 +94,11 @@ public class Car implements Serializable {
     public void setCcount(Integer ccount) {
         this.ccount = ccount;
     }
+
+	@Override
+	public String toString() {
+		return "Car [caid=" + caid + ", fname=" + fname + ", fprice=" + fprice + ", ccount=" + ccount + "]";
+	}
+    
+    
 }

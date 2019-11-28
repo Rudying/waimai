@@ -7,7 +7,6 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -121,6 +120,13 @@ public class FoodController {
 		sb.deleteCharAt(sb.length() - 1);
 		f.setFphoto(sb.toString());
 		fs.update(f);
+	}
+	
+	
+	//根据类型查菜品
+	@PostMapping("findByTid/{tid}")
+	public List<Food> findByTid(@PathVariable Integer tid){
+		return fs.findByTid(tid);
 	}
 
 }

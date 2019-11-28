@@ -32,4 +32,6 @@ public interface FoodMapper {
     List<Food> findAll(RowBounds rb);
     
     List<Food> findBySid(RowBounds rb,Integer sid);
+    
+    List<Food> findByTid(Integer tid);
 }
