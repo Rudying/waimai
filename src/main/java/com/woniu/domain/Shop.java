@@ -35,6 +35,16 @@ public class Shop implements Serializable {
 	
     private Set<Orders> orders;
     
+    private Set<Car>cars;
+    
+	public Set<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(Set<Car> cars) {
+		this.cars = cars;
+	}
+    
 	public Set<Orders> getOrders() {
 		return orders;
 	}

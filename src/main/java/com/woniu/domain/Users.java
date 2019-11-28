@@ -31,7 +31,17 @@ public class Users implements Serializable {
     private Set<Comment> comment;
     
     private Set<Orders> orders;
-      
+    
+    private Set<Car>cars;
+    
+	public Set<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(Set<Car> cars) {
+		this.cars = cars;
+	}
+
 	public Set<Orders> getOrders() {
 		return orders;
 	}

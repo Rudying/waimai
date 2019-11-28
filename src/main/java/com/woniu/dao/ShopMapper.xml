@@ -328,9 +328,9 @@
 
 
 
-	<select id="findShopBySid" resultMap="rm">
+	<select id="findShopByUid" resultMap="rm">
 		SELECT * FROM shop WHERE
-		sid=#{sid}
+		uid=#{uid}
 	</select>
 	<resultMap type="com.woniu.domain.Shop" id="rm">
 		<id property="sid" column="sid" />

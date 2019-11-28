@@ -10,5 +10,6 @@ public interface IFoodService {
    void update(Food t);
    Food findOne(Integer id);
    List<Food> findAll(Integer currentPage, Integer pageSize);
+   List<Food> findBySid(Integer currentPage, Integer pageSize,Integer sid);
    Integer findCount();
 }

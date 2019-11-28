@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.woniu.dao.FoodMapper">
-	<resultMap id="BaseResultMap" type="com.woniu.domain.Food">
-		<id column="fid" jdbcType="INTEGER" property="fid" />
-		<result column="tid" jdbcType="INTEGER" property="tid" />
+<mapper namespace="com.woniu.dao.CarMapper">
+	<resultMap id="BaseResultMap" type="com.woniu.domain.Car">
+		<id column="caid" jdbcType="INTEGER" property="caid" />
+		<result column="uid" jdbcType="INTEGER" property="uid" />
 		<result column="sid" jdbcType="INTEGER" property="sid" />
 		<result column="fname" jdbcType="VARCHAR" property="fname" />
-		<result column="finfo" jdbcType="VARCHAR" property="finfo" />
-		<result column="fphoto" jdbcType="VARCHAR" property="fphoto" />
 		<result column="fprice" jdbcType="DOUBLE" property="fprice" />
+		<result column="fphoto" jdbcType="VARCHAR" property="fphoto" />
+		<result column="ccount" jdbcType="INTEGER" property="ccount" />
 	</resultMap>
 	<sql id="Example_Where_Clause">
 		<where>
@@ -77,16 +77,16 @@
 		</where>
 	</sql>
 	<sql id="Base_Column_List">
-		fid, tid, sid, fname, finfo, fphoto, fprice
+		caid, uid, sid, fname, fprice, fphoto, ccount
 	</sql>
 	<select id="selectByExample"
-		parameterType="com.woniu.domain.FoodExample" resultMap="BaseResultMap">
+		parameterType="com.woniu.domain.CarExample" resultMap="BaseResultMap">
 		select
 		<if test="distinct">
 			distinct
 		</if>
 		<include refid="Base_Column_List" />
-		from food
+		from car
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -98,42 +98,42 @@
 		parameterType="java.lang.Integer" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from food
-		where fid = #{fid,jdbcType=INTEGER}
+		from car
+		where caid = #{caid,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
-		delete from food
-		where fid = #{fid,jdbcType=INTEGER}
+		delete from car
+		where caid = #{caid,jdbcType=INTEGER}
 	</delete>
 	<delete id="deleteByExample"
-		parameterType="com.woniu.domain.FoodExample">
-		delete from food
+		parameterType="com.woniu.domain.CarExample">
+		delete from car
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</delete>
-	<insert id="insert" parameterType="com.woniu.domain.Food">
-		insert into food (fid, tid,
+	<insert id="insert" parameterType="com.woniu.domain.Car">
+		insert into car (caid, uid,
 		sid,
-		fname, finfo, fphoto,
-		fprice)
-		values (#{fid,jdbcType=INTEGER},
-		#{tid,jdbcType=INTEGER},
+		fname, fprice, fphoto,
+		ccount)
+		values (#{caid,jdbcType=INTEGER},
+		#{uid,jdbcType=INTEGER},
 		#{sid,jdbcType=INTEGER},
-		#{fname,jdbcType=VARCHAR}, #{finfo,jdbcType=VARCHAR},
+		#{fname,jdbcType=VARCHAR}, #{fprice,jdbcType=DOUBLE},
 		#{fphoto,jdbcType=VARCHAR},
-		#{fprice,jdbcType=DOUBLE})
+		#{ccount,jdbcType=INTEGER})
 	</insert>
 	<insert id="insertSelective"
-		parameterType="com.woniu.domain.Food">
-		insert into food
+		parameterType="com.woniu.domain.Car">
+		insert into car
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="fid != null">
-				fid,
+			<if test="caid != null">
+				caid,
 			</if>
-			<if test="tid != null">
-				tid,
+			<if test="uid != null">
+				uid,
 			</if>
 			<if test="sid != null">
 				sid,
@@ -141,22 +141,22 @@
 			<if test="fname != null">
 				fname,
 			</if>
-			<if test="finfo != null">
-				finfo,
+			<if test="fprice != null">
+				fprice,
 			</if>
 			<if test="fphoto != null">
 				fphoto,
 			</if>
-			<if test="fprice != null">
-				fprice,
+			<if test="ccount != null">
+				ccount,
 			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
-			<if test="fid != null">
-				#{fid,jdbcType=INTEGER},
+			<if test="caid != null">
+				#{caid,jdbcType=INTEGER},
 			</if>
-			<if test="tid != null">
-				#{tid,jdbcType=INTEGER},
+			<if test="uid != null">
+				#{uid,jdbcType=INTEGER},
 			</if>
 			<if test="sid != null">
 				#{sid,jdbcType=INTEGER},
@@ -164,33 +164,33 @@
 			<if test="fname != null">
 				#{fname,jdbcType=VARCHAR},
 			</if>
-			<if test="finfo != null">
-				#{finfo,jdbcType=VARCHAR},
+			<if test="fprice != null">
+				#{fprice,jdbcType=DOUBLE},
 			</if>
 			<if test="fphoto != null">
 				#{fphoto,jdbcType=VARCHAR},
 			</if>
-			<if test="fprice != null">
-				#{fprice,jdbcType=DOUBLE},
+			<if test="ccount != null">
+				#{ccount,jdbcType=INTEGER},
 			</if>
 		</trim>
 	</insert>
 	<select id="countByExample"
-		parameterType="com.woniu.domain.FoodExample"
+		parameterType="com.woniu.domain.CarExample"
 		resultType="java.lang.Long">
-		select count(*) from food
+		select count(*) from car
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
 	<update id="updateByExampleSelective" parameterType="map">
-		update food
+		update car
 		<set>
-			<if test="record.fid != null">
-				fid = #{record.fid,jdbcType=INTEGER},
+			<if test="record.caid != null">
+				caid = #{record.caid,jdbcType=INTEGER},
 			</if>
-			<if test="record.tid != null">
-				tid = #{record.tid,jdbcType=INTEGER},
+			<if test="record.uid != null">
+				uid = #{record.uid,jdbcType=INTEGER},
 			</if>
 			<if test="record.sid != null">
 				sid = #{record.sid,jdbcType=INTEGER},
@@ -198,14 +198,14 @@
 			<if test="record.fname != null">
 				fname = #{record.fname,jdbcType=VARCHAR},
 			</if>
-			<if test="record.finfo != null">
-				finfo = #{record.finfo,jdbcType=VARCHAR},
+			<if test="record.fprice != null">
+				fprice = #{record.fprice,jdbcType=DOUBLE},
 			</if>
 			<if test="record.fphoto != null">
 				fphoto = #{record.fphoto,jdbcType=VARCHAR},
 			</if>
-			<if test="record.fprice != null">
-				fprice = #{record.fprice,jdbcType=DOUBLE},
+			<if test="record.ccount != null">
+				ccount = #{record.ccount,jdbcType=INTEGER},
 			</if>
 		</set>
 		<if test="_parameter != null">
@@ -213,28 +213,28 @@
 		</if>
 	</update>
 	<update id="updateByExample" parameterType="map">
-		update food
-		set fid = #{record.fid,jdbcType=INTEGER},
-		tid =
-		#{record.tid,jdbcType=INTEGER},
+		update car
+		set caid = #{record.caid,jdbcType=INTEGER},
+		uid =
+		#{record.uid,jdbcType=INTEGER},
 		sid = #{record.sid,jdbcType=INTEGER},
 		fname = #{record.fname,jdbcType=VARCHAR},
-		finfo =
-		#{record.finfo,jdbcType=VARCHAR},
+		fprice =
+		#{record.fprice,jdbcType=DOUBLE},
 		fphoto =
 		#{record.fphoto,jdbcType=VARCHAR},
-		fprice =
-		#{record.fprice,jdbcType=DOUBLE}
+		ccount =
+		#{record.ccount,jdbcType=INTEGER}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
 	</update>
 	<update id="updateByPrimaryKeySelective"
-		parameterType="com.woniu.domain.Food">
-		update food
+		parameterType="com.woniu.domain.Car">
+		update car
 		<set>
-			<if test="tid != null">
-				tid = #{tid,jdbcType=INTEGER},
+			<if test="uid != null">
+				uid = #{uid,jdbcType=INTEGER},
 			</if>
 			<if test="sid != null">
 				sid = #{sid,jdbcType=INTEGER},
@@ -242,104 +242,53 @@
 			<if test="fname != null">
 				fname = #{fname,jdbcType=VARCHAR},
 			</if>
-			<if test="finfo != null">
-				finfo = #{finfo,jdbcType=VARCHAR},
+			<if test="fprice != null">
+				fprice = #{fprice,jdbcType=DOUBLE},
 			</if>
 			<if test="fphoto != null">
 				fphoto = #{fphoto,jdbcType=VARCHAR},
 			</if>
-			<if test="fprice != null">
-				fprice = #{fprice,jdbcType=DOUBLE},
+			<if test="ccount != null">
+				ccount = #{ccount,jdbcType=INTEGER},
 			</if>
 		</set>
-		where fid = #{fid,jdbcType=INTEGER}
+		where caid = #{caid,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey"
-		parameterType="com.woniu.domain.Food">
-		update food
-		set tid = #{tid,jdbcType=INTEGER},
+		parameterType="com.woniu.domain.Car">
+		update car
+		set uid = #{uid,jdbcType=INTEGER},
 		sid =
 		#{sid,jdbcType=INTEGER},
 		fname = #{fname,jdbcType=VARCHAR},
-		finfo =
-		#{finfo,jdbcType=VARCHAR},
-		fphoto = #{fphoto,jdbcType=VARCHAR},
 		fprice =
-		#{fprice,jdbcType=DOUBLE}
-		where fid = #{fid,jdbcType=INTEGER}
+		#{fprice,jdbcType=DOUBLE},
+		fphoto = #{fphoto,jdbcType=VARCHAR},
+		ccount =
+		#{ccount,jdbcType=INTEGER}
+		where caid = #{caid,jdbcType=INTEGER}
 	</update>
 
 
 
-	<select id="findAll" resultMap="rm">
-		SELECT * FROM food f JOIN TYPE t
-		ON f.`tid`=t.`tid`
-		JOIN shop s
-		ON f.`sid`=s.`sid`
-	</select>
-	<resultMap type="com.woniu.domain.Food" id="rm">
-		<id property="fid" column="fid"></id>
-		<result property="fname" column="fname" />
-		<result property="finfo" column="finfo" />
-		<result property="fphoto" column="fphoto" />
-		<result property="fprice" column="fprice" />
-		<result property="tid" column="tid" />
-		<result property="sid" column="sid" />
-		<association property="type"
-			javaType="com.woniu.domain.Type">
-			<id property="tid" column="tid" />
-			<result property="tname" column="tname" />
-			<result property="tphoto" column="tphoto" />
-			<result property="tinfo" column="tinfo" />
-		</association>
-		<association property="shop"
-			javaType="com.woniu.domain.Shop">
-			<id property="sid" column="sid" />
-			<result property="sname" column="sname" />
-			<result property="sinfo" column="sinfo" />
-			<result property="stel" column="stel" />
-			<result property="saddress" column="saddress" />
-			<result property="opentime" column="opentime" />
-			<result property="closetime" column="closetime" />
-			<result property="sstatus" column="sstatus" />
-			<result property="coin" column="coin" />
-		</association>
-	</resultMap>
 
-
-	<select id="findBySid" resultMap="rm1">
-		SELECT * FROM food f JOIN TYPE t
-		ON f.`tid`=t.`tid`
-		JOIN shop s
-		ON f.`sid`=s.`sid`
-		WHERE s.`sid`=#{sid}
+	<select id="findByUid" resultMap="rm">
+		SELECT * FROM car c JOIN users
+		u ON c.`uid`=u.`uid`
+		JOIN shop s ON c.`sid`=s.`sid`
+		WHERE u.`uid`=#{uid}
 	</select>
-	<resultMap type="com.woniu.domain.Food" id="rm1">
-		<id property="fid" column="fid"></id>
+	<resultMap type="com.woniu.domain.Car" id="rm">
+		<id property="caid" column="caid"></id>
 		<result property="fname" column="fname" />
-		<result property="finfo" column="finfo" />
-		<result property="fphoto" column="fphoto" />
 		<result property="fprice" column="fprice" />
-		<result property="tid" column="tid" />
-		<result property="sid" column="sid" />
-		<association property="type"
-			javaType="com.woniu.domain.Type">
-			<id property="tid" column="tid" />
-			<result property="tname" column="tname" />
-			<result property="tphoto" column="tphoto" />
-			<result property="tinfo" column="tinfo" />
-		</association>
-		<association property="shop"
-			javaType="com.woniu.domain.Shop">
-			<id property="sid" column="sid" />
-			<result property="sname" column="sname" />
-			<result property="sinfo" column="sinfo" />
-			<result property="stel" column="stel" />
-			<result property="saddress" column="saddress" />
-			<result property="opentime" column="opentime" />
-			<result property="closetime" column="closetime" />
-			<result property="sstatus" column="sstatus" />
-			<result property="coin" column="coin" />
-		</association>
+		<result property="fphoto" column="fphoto" />
+		<result property="ccount" column="ccount" />
+		<collection property="user" column="uid"
+			select="com.woniu.dao.UsersMapper.findUserByUid">
+		</collection>
+		<collection property="shop" column="sid"
+			select="com.woniu.dao.ShopMapper.selectByPrimaryKey">
+		</collection>
 	</resultMap>
 </mapper>

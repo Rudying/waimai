@@ -15,7 +15,7 @@
 		<!--数据库连接的信息：驱动类、连接地址、用户名、密码,这里配置的是mysql的，当然也可以配置oracle等数据库 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
 			connectionURL="jdbc:mysql://localhost:3306/waimai" userId="root"
-			password="root">
+			password="212212">
 		</jdbcConnection>
 
 		<!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，为 true时把JDBC DECIMAL 
@@ -45,19 +45,6 @@
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 		<!-- 指定数据库表 -->
-		<table tableName="users"></table>
-		<table tableName="roles"></table>
-		<table tableName="permissions"></table>
-	    <table tableName="user_address"></table>
-	    <table tableName="shop"></table>
-	    <table tableName="type"></table>
-	    <table tableName="food"></table>
-	    <table tableName="comment"></table>
-	    <table tableName="cart"></table>
-	    <table tableName="orders"></table>
-	    <table tableName="element"></table>
-	    <table tableName="collection"></table>
-	    <table tableName="advice"></table>
-	    <table tableName="logs"></table>
+		<table tableName="car"></table>
 	</context>
 </generatorConfiguration>

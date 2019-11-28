@@ -25,7 +25,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -57,7 +58,8 @@
 									and ${criterion.condition} #{criterion.value}
 								</when>
 								<when test="criterion.betweenValue">
-									and ${criterion.condition} #{criterion.value} and
+									and ${criterion.condition} #{criterion.value}
+									and
 									#{criterion.secondValue}
 								</when>
 								<when test="criterion.listValue">
@@ -112,12 +114,15 @@
 		</if>
 	</delete>
 	<insert id="insert" parameterType="com.woniu.domain.Food">
-		insert into food (fid, tid, sid,
+		insert into food (fid, tid,
+		sid,
 		fname, finfo, fphoto,
 		fprice)
-		values (#{fid,jdbcType=INTEGER}, #{tid,jdbcType=INTEGER},
+		values (#{fid,jdbcType=INTEGER},
+		#{tid,jdbcType=INTEGER},
 		#{sid,jdbcType=INTEGER},
-		#{fname,jdbcType=VARCHAR}, #{finfo,jdbcType=VARCHAR}, #{fphoto,jdbcType=VARCHAR},
+		#{fname,jdbcType=VARCHAR}, #{finfo,jdbcType=VARCHAR},
+		#{fphoto,jdbcType=VARCHAR},
 		#{fprice,jdbcType=DOUBLE})
 	</insert>
 	<insert id="insertSelective"
@@ -210,12 +215,16 @@
 	<update id="updateByExample" parameterType="map">
 		update food
 		set fid = #{record.fid,jdbcType=INTEGER},
-		tid = #{record.tid,jdbcType=INTEGER},
+		tid =
+		#{record.tid,jdbcType=INTEGER},
 		sid = #{record.sid,jdbcType=INTEGER},
 		fname = #{record.fname,jdbcType=VARCHAR},
-		finfo = #{record.finfo,jdbcType=VARCHAR},
-		fphoto = #{record.fphoto,jdbcType=VARCHAR},
-		fprice = #{record.fprice,jdbcType=DOUBLE}
+		finfo =
+		#{record.finfo,jdbcType=VARCHAR},
+		fphoto =
+		#{record.fphoto,jdbcType=VARCHAR},
+		fprice =
+		#{record.fprice,jdbcType=DOUBLE}
 		<if test="_parameter != null">
 			<include refid="Update_By_Example_Where_Clause" />
 		</if>
@@ -249,11 +258,14 @@
 		parameterType="com.woniu.domain.Food">
 		update food
 		set tid = #{tid,jdbcType=INTEGER},
-		sid = #{sid,jdbcType=INTEGER},
+		sid =
+		#{sid,jdbcType=INTEGER},
 		fname = #{fname,jdbcType=VARCHAR},
-		finfo = #{finfo,jdbcType=VARCHAR},
+		finfo =
+		#{finfo,jdbcType=VARCHAR},
 		fphoto = #{fphoto,jdbcType=VARCHAR},
-		fprice = #{fprice,jdbcType=DOUBLE}
+		fprice =
+		#{fprice,jdbcType=DOUBLE}
 		where fid = #{fid,jdbcType=INTEGER}
 	</update>
 
@@ -266,6 +278,43 @@
 		ON f.`sid`=s.`sid`
 	</select>
 	<resultMap type="com.woniu.domain.Food" id="rm">
+		<id property="fid" column="fid"></id>
+		<result property="fname" column="fname" />
+		<result property="finfo" column="finfo" />
+		<result property="fphoto" column="fphoto" />
+		<result property="fprice" column="fprice" />
+		<result property="tid" column="tid" />
+		<result property="sid" column="sid" />
+		<association property="type"
+			javaType="com.woniu.domain.Type">
+			<id property="tid" column="tid" />
+			<result property="tname" column="tname" />
+			<result property="tphoto" column="tphoto" />
+			<result property="tinfo" column="tinfo" />
+		</association>
+		<association property="shop"
+			javaType="com.woniu.domain.Shop">
+			<id property="sid" column="sid" />
+			<result property="sname" column="sname" />
+			<result property="sinfo" column="sinfo" />
+			<result property="stel" column="stel" />
+			<result property="saddress" column="saddress" />
+			<result property="opentime" column="opentime" />
+			<result property="closetime" column="closetime" />
+			<result property="sstatus" column="sstatus" />
+			<result property="coin" column="coin" />
+		</association>
+	</resultMap>
+
+
+	<select id="findBySid" resultMap="rm1">
+		SELECT * FROM food f JOIN TYPE t
+		ON f.`tid`=t.`tid`
+		JOIN shop s
+		ON f.`sid`=s.`sid`
+		WHERE s.`sid`=#{sid}
+	</select>
+	<resultMap type="com.woniu.domain.Food" id="rm1">
 		<id property="fid" column="fid"></id>
 		<result property="fname" column="fname" />
 		<result property="finfo" column="finfo" />

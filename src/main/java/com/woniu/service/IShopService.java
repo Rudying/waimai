@@ -11,4 +11,5 @@ public interface IShopService {
    void update(Shop t);
    Shop findOne(Integer id);
    List<Shop> findAll();
+   Shop findShopByUid(Integer id);
 }

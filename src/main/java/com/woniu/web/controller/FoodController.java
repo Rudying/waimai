@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,11 +68,16 @@ public class FoodController {
 
 	// 查询所有
 	@PostMapping("find")
-	public List<Food> findAll(Integer limit,Integer offset) {
-		
+	public List<Food> findAll(Integer limit,Integer offset) {	
 		return fs.findAll((offset-1)*limit,limit);
 	}
 	
+	// 查询所有
+	@PostMapping("findBySid")
+	public List<Food> findBySid(Integer limit,Integer offset,Integer sid) {			
+		return fs.findBySid((offset-1)*limit,limit,sid);
+	}
+		
 	//查询到的所有行数
 	@PostMapping("count")
 	public Integer count() {

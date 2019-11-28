@@ -30,4 +30,6 @@ public interface FoodMapper {
     int updateByPrimaryKey(Food record);
     
     List<Food> findAll(RowBounds rb);
+    
+    List<Food> findBySid(RowBounds rb,Integer sid);
 }

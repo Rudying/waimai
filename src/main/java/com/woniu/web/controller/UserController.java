@@ -157,6 +157,13 @@ public  class UserController {
 		u.setPassword(hex);
 		us.update(u);
 	}
+	
+	//根据用户名获取id
+	@PostMapping("findByName")
+	public Integer findIdByName(String username) {
+		Integer uid = us.getUserId(username);
+		return uid;
+	}
 
 	// 查询所有
 	@GetMapping()

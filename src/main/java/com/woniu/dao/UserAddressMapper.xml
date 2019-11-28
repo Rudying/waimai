@@ -245,11 +245,36 @@
 
 
 
-	<select id="findAll" resultMap="rm">
+	<select id="findByUid" resultMap="rm">
+		SELECT * FROM user_address JOIN users
+		ON users.`uid`=user_address.`uid`
+		WHERE users.`uid`=#{uid}
+	</select>
+	<resultMap type="com.woniu.domain.UserAddress" id="rm">
+		<id property="uaid" column="uaid"></id>
+		<result property="uid" column="uid" />
+		<result property="city" column="city" />
+		<result property="street" column="street" />
+		<result property="uinfo" column="uinfo" />
+		<result property="tel" column="tel" />
+		<association property="users"
+			javaType="com.woniu.domain.Users">
+			<id property="uid" column="uid" />
+			<result property="username" column="username" />
+			<result property="password" column="password" />
+			<result property="sex" column="sex" />
+			<result property="photo" column="photo" />
+			<result property="nickname" column="nickname" />
+			<result property="email" column="email" />
+		</association>
+	</resultMap>
+	
+	
+	<select id="findUserAndAddress" resultMap="rm1">
 		SELECT * FROM user_address JOIN users
 		ON users.`uid`=user_address.`uid`
 	</select>
-	<resultMap type="com.woniu.domain.UserAddress" id="rm">
+	<resultMap type="com.woniu.domain.UserAddress" id="rm1">
 		<id property="uaid" column="uaid"></id>
 		<result property="uid" column="uid" />
 		<result property="city" column="city" />

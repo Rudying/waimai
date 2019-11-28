@@ -319,7 +319,7 @@
 			<result property="fphoto" column="fphoto" />
 			<result property="fprice" column="fprice" />
 			<result property="tid" column="tid" />
-			<collection property="shop" column="sid" select="com.woniu.dao.ShopMapper.findShopBySid"></collection>
+			<collection property="shop" column="sid" select="com.woniu.dao.ShopMapper.selectByPrimaryKey"></collection>
 		</association>
 	</resultMap>
 </mapper>

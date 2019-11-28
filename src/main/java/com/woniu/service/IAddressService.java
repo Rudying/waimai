@@ -11,4 +11,5 @@ public interface IAddressService {
 	   UserAddress findOne(Integer id);
 	   List<UserAddress> findAll();
 	   List<UserAddress> findUserAndAddress();
+	   List<UserAddress> findByUid(Integer uid);
 }

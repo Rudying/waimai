@@ -2,22 +2,23 @@ package com.woniu.service.impl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.woniu.dao.UserAddressMapper;
-import com.woniu.domain.UserAddress;
-import com.woniu.service.IAddressService;
+
+import com.woniu.dao.CarMapper;
+import com.woniu.domain.Car;
+import com.woniu.service.ICarService;
+
 @Service
-public class AddressServiceImpl implements IAddressService{
-@Autowired
-private UserAddressMapper mapper;
+public class CarServiceImpl implements ICarService{
+	@Resource
+	private CarMapper mapper;
 
 	@Transactional
 	@Override
-	public void save(UserAddress t) {
+	public void save(Car t) {
 		// TODO Auto-generated method stub
-		
 		mapper.insertSelective(t);
 	}
 
@@ -30,37 +31,30 @@ private UserAddressMapper mapper;
 
 	@Transactional
 	@Override
-	public void update(UserAddress t) {
+	public void update(Car t) {
 		// TODO Auto-generated method stub
 		mapper.updateByPrimaryKeySelective(t);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public UserAddress findOne(Integer id) {
+	public Car findOne(Integer id) {
 		// TODO Auto-generated method stub
 		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<UserAddress> findAll() {
+	public List<Car> findAll() {
 		// TODO Auto-generated method stub
 		return mapper.selectByExample(null);
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<UserAddress> findByUid(Integer uid) {
+	public List<Car> findByUid(Integer uid) {
 		// TODO Auto-generated method stub
 		return mapper.findByUid(uid);
-	}
-
-	@Transactional(readOnly = true)
-	@Override
-	public List<UserAddress> findUserAndAddress() {
-		// TODO Auto-generated method stub
-		return mapper.findUserAndAddress();
 	}
 
 }

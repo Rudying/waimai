@@ -28,5 +28,7 @@ public interface UserAddressMapper {
 
     int updateByPrimaryKey(UserAddress record);
     
-    List<UserAddress> findAll();
+    List<UserAddress> findByUid(Integer uid);
+    
+    List<UserAddress> findUserAndAddress();
 }

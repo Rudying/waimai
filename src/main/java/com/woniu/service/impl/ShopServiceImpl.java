@@ -49,4 +49,11 @@ private ShopMapper mapper;
 		return mapper.findAll();
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public Shop findShopByUid(Integer id) {
+		// TODO Auto-generated method stub
+		return mapper.findShopByUid(id);
+	}
+
 }

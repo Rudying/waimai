@@ -52,6 +52,13 @@ private FoodMapper mapper;
 
 	@Transactional(readOnly = true)
 	@Override
+	public List<Food> findBySid(Integer currentPage, Integer pageSize,Integer sid){
+		// TODO Auto-generated method stub
+		return mapper.findBySid(new RowBounds(currentPage, pageSize),sid);
+	}
+	
+	@Transactional(readOnly = true)
+	@Override
 	public Integer findCount() {
 		// TODO Auto-generated method stub
 		return mapper.selectByExample(null).size();

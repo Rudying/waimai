@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +22,11 @@ private IAddressService service;
 @GetMapping
 public List<UserAddress> findAll(){
 	return service.findUserAndAddress();
-	
+}
+
+//根据uid找到该用户的地址
+@PostMapping("{uid}")
+public List<UserAddress>findByUid(@PathVariable Integer uid){
+	return service.findByUid(uid);
 }
 }
