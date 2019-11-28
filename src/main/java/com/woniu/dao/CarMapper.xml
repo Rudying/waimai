@@ -291,4 +291,30 @@
 			select="com.woniu.dao.ShopMapper.selectByPrimaryKey">
 		</collection>
 	</resultMap>
+	
+	
+	<select id="findBySidAndUid" resultMap="rm1">
+		SELECT * FROM car c JOIN users
+		u ON c.`uid`=u.`uid`
+		JOIN shop s ON c.`sid`=s.`sid`
+		WHERE u.`uid`=#{uid}
+		AND s.`sid`=#{sid}
+	</select>
+	<resultMap type="com.woniu.domain.Car" id="rm1">
+		<id property="caid" column="caid"></id>
+		<result property="fname" column="fname" />
+		<result property="fprice" column="fprice" />
+		<result property="fphoto" column="fphoto" />
+		<result property="ccount" column="ccount" />
+		<collection property="user" column="uid"
+			select="com.woniu.dao.UsersMapper.findUserByUid">
+		</collection>
+		<collection property="shop" column="sid"
+			select="com.woniu.dao.ShopMapper.selectByPrimaryKey">
+		</collection>
+	</resultMap>
+	
+	<select id="findPrice" parameterType="java.lang.Integer" resultType="java.lang.Double">
+	    SELECT SUM(fprice*ccount) FROM car WHERE uid=#{uid}
+	</select>
 </mapper>

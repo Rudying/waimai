@@ -29,4 +29,17 @@ public List<UserAddress> findAll(){
 public List<UserAddress>findByUid(@PathVariable Integer uid){
 	return service.findByUid(uid);
 }
+
+//添加新地址
+@PostMapping
+public void save(UserAddress address) {
+	service.save(address);
+}
+
+//添加新地址
+@PostMapping("update")
+public void update(UserAddress address) {
+	service.update(address);
+}
+
 }

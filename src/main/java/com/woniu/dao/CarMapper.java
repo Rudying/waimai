@@ -29,4 +29,8 @@ public interface CarMapper {
     int updateByPrimaryKey(Car record);
     
     List<Car> findByUid(Integer uid);
+    
+    List<Car> findBySidAndUid(Integer sid,Integer uid);
+    
+    Double findPrice(Integer uid);
 }

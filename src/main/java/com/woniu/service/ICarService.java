@@ -11,4 +11,6 @@ public interface ICarService {
 	   Car findOne(Integer id);
 	   List<Car> findAll();
 	   List<Car> findByUid(Integer uid);
+	   List<Car> findBySidAndUid(Integer sid,Integer uid);
+	   Double findPrice(Integer uid);
 }

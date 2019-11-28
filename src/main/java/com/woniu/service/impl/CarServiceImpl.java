@@ -57,4 +57,17 @@ public class CarServiceImpl implements ICarService{
 		return mapper.findByUid(uid);
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public List<Car> findBySidAndUid(Integer sid, Integer uid) {
+		// TODO Auto-generated method stub
+		return mapper.findBySidAndUid(sid, uid);
+	}
+
+	@Override
+	public Double findPrice(Integer uid) {
+		// TODO Auto-generated method stub
+		return mapper.findPrice(uid);
+	}
+
 }
